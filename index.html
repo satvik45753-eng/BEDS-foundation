@@ -1,52 +1,32 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BESD Foundation - Bambdeo Education and Social Development Foundation</title>
     
-    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome Icons CDN (Icons ke liye) --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     
-    <!-- Inter Font --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Typed.js (Typing Animation Library) --><script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     
     <style>
-        /* Inter font ko default banate hain */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Custom style for the typing cursor */
-        .typed-cursor {
-            color: #ffffff; /* Cursor ko safed kiya, taaki dark background par dikhe */
-            font-size: 2.5rem;
-            line-height: 1;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
         
-        /* Custom Pulse Animation for the button */
-        @keyframes pulse-slow {
-          50% {
-            opacity: .85;
-            transform: scale(1.02);
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        /* Hero Section ke liye naya background */
+        /* Hero Background */
         .hero-background {
-            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%); /* Blue to Yellow Gradient */
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
             position: relative;
-            overflow: hidden; /* Extra content ko hide karne ke liye */
+            overflow: hidden;
         }
-        /* Radial blur effect for a more dynamic look */
         .hero-background::before {
             content: '';
             position: absolute;
@@ -58,34 +38,29 @@
                         radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 60%);
             opacity: 0.8;
             z-index: 0;
-            animation: background-animate 20s infinite alternate; /* Slow animation for background */
+            animation: background-animate 20s infinite alternate;
         }
-
         @keyframes background-animate {
             0% { transform: scale(1) translate(0, 0); }
             50% { transform: scale(1.1) translate(-10px, 10px); }
             100% { transform: scale(1) translate(0, 0); }
         }
-        
-        /* Ensure content is above the background effect */
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
+        .hero-content { position: relative; z-index: 1; }
+        .typed-cursor { color: #ffffff; font-size: 2.5rem; }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
-    <!-- ======== HEADER / NAVIGATION BAR ======== --><header class="bg-white shadow-md sticky top-0 z-50">
+    <!-- ======== HEADER ======== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Website Logo / Naam --><div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center">
                     <a href="index.html" class="text-xl font-bold text-indigo-700">
                         BESD <span class="text-gray-700">FOUNDATION</span>
                     </a>
                 </div>
-                
-                <!-- Desktop Menu Links --><div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
+                <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
                     <a href="index.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-600 px-2 py-1">Home</a>
                     <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">About Us</a>
                     <a href="courses.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Courses</a>
@@ -95,55 +70,45 @@
                     <a href="gallery.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Gallery</a>
                     <a href="download.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Download</a>
                 </div>
-                
-                <!-- Student Zone Button (Corner) --><div class="hidden md:block">
+                <div class="hidden md:block">
                     <a href="student_zone.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
                         <i class="fa fa-user-graduate mr-2"></i> Student Zone
                     </a>
                 </div>
-                
-                <!-- Mobile Menu Button --><div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fa fa" id="menu-icon-open"></i>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        <i class="fa fa-bars fa-lg" id="menu-icon"></i>
                     </button>
                 </div>
             </div>
         </nav>
-
-        <!-- Mobile Menu (Dropdown) --><div id="mobile-menu" class="md:hidden hidden border-t border-gray-200">
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="about.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
-                <a href="courses.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
-                <a href="faculty.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
-                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
-                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
-                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
-                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
-            </div>
-            <!-- Mobile Student Zone Button --><div class="px-4 pb-4">
-                 <a href="student_zone.html" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
-                    <i class="fa fa-user-graduate mr-2"></i> Student Zone
-                </a>
+                <!-- Other links... -->
+                <a href="student_zone.html" class="block w-full text-center px-4 py-2 mt-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">Student Zone</a>
             </div>
         </div>
     </header>
 
-    <!-- ======== MAIN CONTENT ======== --><main>
-        <!-- 1. Hero Section (Welcome Area) - Updated with new background --><section class="relative hero-background pt-16 pb-20 lg:pt-24 lg:pb-28 text-white">
+    <main>
+        <!-- ======== HERO SECTION ======== -->
+        <section class="relative hero-background pt-16 pb-20 lg:pt-24 lg:pb-28 text-white">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 hero-content">
                 <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
-                    <!-- Text Content --><div class="lg:col-span-6 text-center lg:text-left">
+                    <div class="lg:col-span-6 text-center lg:text-left">
                         <span class="text-sm font-semibold uppercase tracking-wider text-indigo-200">Welcome to BESD Foundation</span>
                         <h1 class="mt-4 text-4xl lg:text-5xl font-extrabold tracking-tight min-h-[120px] sm:min-h-[140px] lg:min-h-0 text-white">
-                            <!-- Typing animation will appear here --><span id="typed-text"></span>
+                            <span id="typed-text"></span>
                         </h1>
-                        <p class="mt-6 text-lg text-indigo-100">
+                        <p class="mt-6 text-lg text-indigo-100" id="hero-subtitle">
                             Building a better future through education and social development. Our goal is to provide quality education to every student.
                         </p>
                         <div class="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
-                            <a href="courses.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-900 bg-yellow-400 hover:bg-yellow-500 shadow-lg animate-pulse-slow">
+                            <a href="courses.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-900 bg-yellow-400 hover:bg-yellow-500 shadow-lg">
                                 View Our Courses
                             </a>
                             <a href="about.html" class="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 text-base font-medium rounded-md text-indigo-100 hover:bg-indigo-700 hover:border-indigo-700 shadow-sm">
@@ -151,175 +116,268 @@
                             </a>
                         </div>
                     </div>
-                    <!-- Image Content --><div class="lg:col-span-6 mt-10 lg:mt-0">
-                        <img class="w-full rounded-lg shadow-xl" src="https://placehold.co/600x400/5248EE/FFFFFF?text=BESD+Foundation" alt="[Students learning in a classroom]">
+                    <div class="lg:col-span-6 mt-10 lg:mt-0">
+                        <img class="w-full rounded-lg shadow-xl border-4 border-indigo-300 border-opacity-30" src="https://placehold.co/600x400/5248EE/FFFFFF?text=BESD+Foundation" alt="Students">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. Features Section (Humari Visheshtayein) --><section class="bg-gray-50 py-16 lg:py-24">
+        <!-- ======== DYNAMIC: POPULAR COURSES ======== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900">Our Popular Courses</h2>
+                    <p class="mt-4 text-lg text-gray-600">Explore our industry-relevant courses designed for your career growth.</p>
+                </div>
+                
+                <div id="featured-courses-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Loading State -->
+                    <div class="col-span-full text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
+                        <p class="mt-2 text-gray-500">Loading courses...</p>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="courses.html" class="text-indigo-600 font-semibold hover:text-indigo-800">View All Courses &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== FEATURES SECTION (Static) ======== -->
+        <section class="bg-gray-50 py-16">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-gray-900">Why Trust Us?</h2>
-                    <p class="mt-4 text-lg text-gray-600">
-                        We are committed to providing excellent education and the right guidance.
-                    </p>
                 </div>
-                
-                <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <!-- Feature 1: Quality Courses --><div class="bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-100 text-indigo-600">
-                            <i class="fa fa-book-open text-2xl"></i>
-                        </div>
-                        <h3 class="mt-5 text-xl font-semibold text-gray-900">Quality Courses</h3>
-                        <p class="mt-3 text-base text-gray-600">
-                            Industry-relevant computer and vocational courses that make you job-ready.
-                        </p>
+                <div class="mt-12 grid gap-8 md:grid-cols-3">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                        <div class="h-12 w-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto text-indigo-600 mb-4"><i class="fa fa-certificate text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-gray-900">ISO Certified</h3>
+                        <p class="mt-2 text-gray-600 text-sm">We are a registered and ISO 9001:2015 certified organization.</p>
                     </div>
-                    
-                    <!-- Feature 2: Expert Faculty --><div class="bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-100 text-indigo-600">
-                            <i class="fa fa-chalkboard-teacher text-2xl"></i>
-                        </div>
-                        <h3 class="mt-5 text-xl font-semibold text-gray-900">Expert Faculty</h3>
-                        <p class="mt-3 text-base text-gray-600">
-                            Learn from experienced teachers dedicated to your success.
-                        </p>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                        <div class="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 mb-4"><i class="fa fa-chalkboard-teacher text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-gray-900">Expert Faculty</h3>
+                        <p class="mt-2 text-gray-600 text-sm">Learn from experienced professionals dedicated to your success.</p>
                     </div>
-                    
-                    <!-- Feature 3: Study Centers --><div class="bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-100 text-indigo-600">
-                            <i class="fa fa-school text-2xl"></i>
-                        </div>
-                        <h3 class="mt-5 text-xl font-semibold text-gray-900">Wide Study Network</h3>
-                        <p class="mt-3 text-base text-gray-600">
-                            A large network of our authorized study centers in areas near you.
-                        </p>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                        <div class="h-12 w-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto text-yellow-600 mb-4"><i class="fa fa-hand-holding-heart text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-gray-900">Social Welfare</h3>
+                        <p class="mt-2 text-gray-600 text-sm">We are committed to the upliftment of the underprivileged.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Call to Action (Franchise) --><section class="bg-gray-800">
-            <div class="container mx-auto max-w-4xl py-16 px-4 sm:px-6 lg:py-24 lg:px-8 text-center">
-                <h2 class="text-3xl font-extrabold text-white">
-                    Partner With Us
-                </h2>
-                <p class="mt-4 text-lg leading-6 text-gray-300">
-                    Start your own BESD Foundation Study Center. Join us in spreading education by becoming a franchise partner.
-                </p>
-                <a href="franchise.html" class="mt-8 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
-                    Apply for Franchise
-                </a>
+        <!-- ======== DYNAMIC: RECENT GALLERY ======== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Recent Activities</h2>
+                        <p class="text-gray-600">Glimpses from our latest events.</p>
+                    </div>
+                    <a href="gallery.html" class="text-indigo-600 font-semibold text-sm hover:underline">View Gallery</a>
+                </div>
+                
+                <div id="home-gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Dynamic Images will load here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== CALL TO ACTION ======== -->
+        <section class="bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold">Start Your Own Study Center</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Join our network and contribute to the education revolution. Apply for a BESD Foundation franchise today.</p>
+                <a href="franchise.html" class="mt-8 inline-block bg-indigo-600 text-white px-8 py-3 rounded-md font-bold hover:bg-indigo-700 transition">Apply Now</a>
             </div>
         </section>
     </main>
 
-    <!-- ======== FOOTER ======== --><footer class="bg-gray-900 text-gray-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Column 1: Foundation Info --><div>
-                    <h3 class="text-lg font-semibold text-white mb-4">BESD Foundation</h3>
-                    <p class="text-sm">
-                        Bambdeo Education and Social Development Foundation. Dedicated to education and social development.
-                    </p>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
-                    </div>
+    <!-- ======== FOOTER ======== -->
+    <footer class="bg-gray-800 text-gray-300 border-t border-gray-700">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">BESD Foundation</h3>
+                    <p class="text-sm">Empowering society through education and skill development.</p>
                 </div>
-
-                <!-- Column 2: Quick Links --><div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="about.html" class="hover:text-white">About Us</a></li>
                         <li><a href="courses.html" class="hover:text-white">Courses</a></li>
-                        <li><a href="franchise.html" class="hover:text-white">Franchise</a></li>
                         <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
-                        <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                        <li><a href="student_zone.html" class="hover:text-white">Student Zone</a></li>
                     </ul>
                 </div>
-
-                <!-- Column 3: Contact Us --><div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
-                    <ul class="space-y-3 text-sm">
-                        <li class="flex items-start">
-                            <i class="fa fa-home mr-3 mt-1 flex-shrink-0"></i>
-                            <span>[Your Address Here],<br>City, State - PIN</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-phone mr-3"></i>
-                            <a href="tel:+911234567890" class="hover:text-white">+91 12345 67890</a>
-                        </li>
-                         <li class="flex items-center">
-                            <i class="fab fa-whatsapp mr-3"></i>
-                            <a href="https://wa.me/911234567890" target="_blank" class="hover:text-white">+91 12345 67890</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope mr-3"></i>
-                            <a href="mailto:info@besdfoundation.com" class="hover:text-white">info@besdfoundation.com</a>
-                        </li>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa fa-phone mr-2"></i> +91 98765 43210</li>
+                        <li><i class="fa fa-envelope mr-2"></i> info@besdfoundation.com</li>
+                        <li><i class="fa fa-map-marker-alt mr-2"></i> Patna, Bihar, India</li>
                     </ul>
                 </div>
-
-                <!-- Column 4: Home Link (jaisa aapne kaha) --><div>
-                     <h3 class="text-lg font-semibold text-white mb-4">Home</h3>
-                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="hover:text-white">Go to Homepage</a></li>
-                     </ul>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
-
             </div>
-            
-            <!-- Copyright Section --><div class="mt-10 border-t border-gray-800 pt-6 text-center text-sm">
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm">
                 <p>&copy; 2025 BESD Foundation. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Mobile Menu ke liye --><script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Mobile Menu Logic
-            const menuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon-open');
+    <!-- ======== FIREBASE & LOGIC ======== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- CONFIGURATION (Same as Admin) ---
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- 1. TYPED.JS ANIMATION (Static Fallback logic) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            new Typed('#typed-text', {
+                strings: ['Bambdeo Education and Social Development Foundation', 'Empowering Youth', 'Building Future'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
             
-            // Shuruaat mein 'fa-bars' (menu icon) set karein
-            if (menuIcon) {
-                menuIcon.className = 'fa fa-bars fa-lg';
-            }
-
-            if (menuButton) {
-                menuButton.addEventListener('click', () => {
-                    const isMenuOpen = mobileMenu.classList.toggle('hidden');
-                    
-                    // Icon ko toggle karein
-                    if (isMenuOpen) {
-                        menuIcon.className = 'fa fa-bars fa-lg'; // Menu band hai
-                    } else {
-                        menuIcon.className = 'fa fa-times fa-lg'; // Menu khula hai (X icon)
-                    }
-                });
-            }
-
-            // Typed.js Animation
-            if (typeof Typed !== 'undefined') {
-                var options = {
-                    strings: ['Bambdeo Education and Social Development Foundation'],
-                    typeSpeed: 50, // Speed of typing
-                    backSpeed: 50, // Not used here as loop is false
-                    loop: false, // Do not repeat
-                    showCursor: true,
-                    cursorChar: '_',
-                    startDelay: 500, // Wait half a second before starting
-                };
-                new Typed('#typed-text', options);
+            // Mobile Menu
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            if(btn){
+                btn.addEventListener('click', () => menu.classList.toggle('hidden'));
             }
         });
-    </script>
 
+        // --- 2. LOAD FEATURED COURSES (From Firestore) ---
+        async function loadFeaturedCourses() {
+            const grid = document.getElementById('featured-courses-grid');
+            try {
+                // Assuming 'courses' collection exists (from Admin Panel)
+                const q = query(collection(db, "courses"), orderBy("createdAt", "desc"), limit(3)); 
+                // Note: Ensure you add a 'createdAt' field when saving courses in admin, or remove orderBy for now.
+                // For simplicity, let's just fetch:
+                const simpleQ = query(collection(db, "courses"), limit(3));
+                
+                const querySnapshot = await getDocs(simpleQ);
+                
+                grid.innerHTML = ""; // Clear loader
+
+                if(querySnapshot.empty) {
+                    // Fallback Static Data if database is empty
+                    grid.innerHTML = `
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
+                            <div class="h-12 w-12 bg-blue-100 rounded-md flex items-center justify-center text-blue-600 mb-4"><i class="fa fa-laptop-code text-2xl"></i></div>
+                            <h3 class="text-xl font-bold text-gray-900">ADCA</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Advance Diploma in Computer Application.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
+                            <div class="h-12 w-12 bg-green-100 rounded-md flex items-center justify-center text-green-600 mb-4"><i class="fa fa-desktop text-2xl"></i></div>
+                            <h3 class="text-xl font-bold text-gray-900">DCA</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Diploma in Computer Application (6 Months).</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
+                            <div class="h-12 w-12 bg-pink-100 rounded-md flex items-center justify-center text-pink-600 mb-4"><i class="fa fa-cut text-2xl"></i></div>
+                            <h3 class="text-xl font-bold text-gray-900">Tailoring</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Vocational training in Fashion Design.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    // Determine Icon based on category (simple logic)
+                    let icon = 'fa-book';
+                    let color = 'indigo';
+                    if(data.category?.toLowerCase().includes('computer')) { icon = 'fa-laptop'; color = 'blue'; }
+                    else if(data.category?.toLowerCase().includes('vocational')) { icon = 'fa-cut'; color = 'pink'; }
+
+                    const card = document.createElement('div');
+                    card.className = "bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300";
+                    card.innerHTML = `
+                        <div class="h-12 w-12 bg-${color}-100 rounded-md flex items-center justify-center text-${color}-600 mb-4">
+                            <i class="fa ${icon} text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">${data.courseName || data.title || 'Course'}</h3>
+                        <div class="flex items-center text-xs text-gray-500 mt-2 mb-3">
+                            <span class="bg-gray-100 px-2 py-1 rounded mr-2">${data.duration || 'N/A'}</span>
+                            <span class="bg-${color}-50 text-${color}-700 px-2 py-1 rounded">${data.category || 'General'}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm line-clamp-2">${data.description || 'Join this course to enhance your skills.'}</p>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (e) {
+                console.error("Error fetching courses:", e);
+                grid.innerHTML = '<p class="text-center col-span-full text-red-400">Unable to load courses currently.</p>';
+            }
+        }
+
+        // --- 3. LOAD RECENT GALLERY (From Firestore) ---
+        async function loadRecentGallery() {
+            const grid = document.getElementById('home-gallery-grid');
+            try {
+                // Fetch top 4 recent images
+                const q = query(collection(db, "gallery"), orderBy("timestamp", "desc"), limit(4));
+                const querySnapshot = await getDocs(q);
+
+                grid.innerHTML = "";
+                
+                if(querySnapshot.empty) {
+                    grid.innerHTML = '<p class="text-center col-span-full text-gray-400 text-sm">No recent activities.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const div = document.createElement('div');
+                    div.className = "relative h-40 rounded-lg overflow-hidden group shadow-sm";
+                    div.innerHTML = `
+                        <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="text-white text-xs font-bold px-2 text-center">${data.title}</span>
+                        </div>
+                    `;
+                    grid.appendChild(div);
+                });
+
+            } catch (e) {
+                console.log("Gallery fetch error (likely empty DB or rules):", e);
+            }
+        }
+
+        // Initialize Fetching
+        loadFeaturedCourses();
+        loadRecentGallery();
+
+    </script>
 </body>
 </html>
