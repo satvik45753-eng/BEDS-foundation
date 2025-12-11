@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Student Zone - BESD Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-link.active { background-color: #4F46E5; color: white; }
+        .sidebar-link:hover:not(.active) { background-color: #1F2937; color: #fff; }
+        #resultModal { backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-900 text-gray-400 flex flex-col hidden md:flex">
+            <div class="h-16 flex items-center justify-center border-b border-gray-800"><h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1></div>
+            <nav class="flex-1 overflow-y-auto py-4">
+                <ul class="space-y-1 px-2">
+                    <li><a href="dashboard.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-tachometer-alt w-6"></i><span>Dashboard</span></a></li>
+                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Content Management</li>
+                    <li><a href="admin_about.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-info-circle w-6"></i><span>About Us</span></a></li>
+                    <li><a href="admin_courses.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-book-open w-6"></i><span>Courses</span></a></li>
+                    <li><a href="admin_faculty.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-chalkboard-teacher w-6"></i><span>Faculty</span></a></li>
+                    <li><a href="admin_gallery.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-images w-6"></i><span>Gallery</span></a></li>
+                    <li><a href="admin_downloads.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-download w-6"></i><span>Downloads</span></a></li>
+                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Network & Students</li>
+                    <li><a href="admin_franchise.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-briefcase w-6"></i><span>Franchise</span></a></li>
+                    <li><a href="admin_study_centers.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-building w-6"></i><span>Study Centers</span></a></li>
+                    <li><a href="admin_student_zone.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-user-graduate w-6"></i><span>Student Zone</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
+                <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Student Results</h2></div>
+                <div class="flex items-center space-x-4"><div class="flex items-center space-x-2"><img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100"><span class="text-gray-700 font-medium text-sm">Super Admin</span></div></div>
+            </header>
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <button onclick="document.getElementById('resultModal').classList.remove('hidden')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center"><i class="fa fa-plus-circle mr-2"></i> Add New Result</button>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left text-sm text-gray-600">
+                        <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs"><tr><th class="px-6 py-4">Enrollment No</th><th class="px-6 py-4">Name</th><th class="px-6 py-4">Result</th><th class="px-6 py-4 text-right">Actions</th></tr></thead>
+                        <tbody class="divide-y divide-gray-200"><tr class="hover:bg-gray-50"><td class="px-6 py-4 font-mono text-indigo-600 font-bold">BESD/2025/001</td><td class="px-6 py-4">Rahul Kumar</td><td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Pass</span></td><td class="px-6 py-4 text-right"><button class="text-indigo-600"><i class="fa fa-edit"></i></button></td></tr></tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="resultModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4">
+            <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center"><h3 class="text-white font-bold text-lg">Add Result</h3><button onclick="document.getElementById('resultModal').classList.add('hidden')" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button></div>
+            <form class="p-6" onsubmit="event.preventDefault(); alert('Saved!'); document.getElementById('resultModal').classList.add('hidden');"><div class="grid gap-4"><div><label class="block text-gray-700 text-sm font-bold mb-2">Student Name</label><input type="text" class="w-full border border-gray-300 rounded-lg p-2" required></div></div><div class="mt-6 flex justify-end space-x-3"><button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">Publish</button></div></form>
+        </div>
+    </div>
+</body>
+</html>

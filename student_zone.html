@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Zone - BESD Foundation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Consistent Gradient Background */
+        .page-header-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header-bg::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 60%);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .header-content { position: relative; z-index: 1; }
+
+        /* Zone Card Styling */
+        .zone-card {
+            transition: all 0.3s ease;
+        }
+        .zone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Marksheet Table */
+        .marksheet-table th {
+            background-color: #f3f4f6;
+            color: #374151;
+            font-weight: 600;
+        }
+        .marksheet-table td, .marksheet-table th {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .marksheet-table td:first-child {
+            text-align: left;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- ======== HEADER / NAVIGATION BAR ======== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-indigo-700">
+                        BESD <span class="text-gray-700">FOUNDATION</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">About Us</a>
+                    <a href="courses.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Courses</a>
+                    <a href="faculty.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Faculty</a>
+                    <a href="franchise.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Franchise</a>
+                    <a href="study_center.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Study Center</a>
+                    <a href="gallery.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Gallery</a>
+                    <a href="download.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Download</a>
+                </div>
+                
+                <!-- Student Zone Button (Active) -->
+                <div class="hidden md:block">
+                    <a href="student_zone.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm ring-2 ring-offset-2 ring-indigo-500">
+                        <i class="fa fa-user-graduate mr-2"></i> Student Zone
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        <i class="fa fa-bars fa-lg" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+                <a href="courses.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
+                <a href="faculty.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
+                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
+                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
+                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
+            </div>
+             <div class="px-4 pb-4">
+                 <a href="student_zone.html" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
+                    <i class="fa fa-user-graduate mr-2"></i> Student Zone
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======== PAGE HEADER ======== -->
+    <div class="page-header-bg py-16 lg:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 header-content text-center">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Student Verification Zone</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-indigo-100">
+                Verify your marksheet and certificates online. Enter your details below to view results.
+            </p>
+        </div>
+    </div>
+
+    <!-- ======== MAIN CONTENT ======== -->
+    <main class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Toggle Tabs -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white p-1 rounded-full shadow-sm inline-flex border border-gray-200">
+                    <button onclick="showSection('marksheet')" id="btn-marksheet" class="px-6 py-2 rounded-full text-sm font-bold text-white bg-indigo-600 transition duration-300">
+                        <i class="fa fa-file-alt mr-2"></i> Marksheet
+                    </button>
+                    <button onclick="showSection('certificate')" id="btn-certificate" class="px-6 py-2 rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100 transition duration-300">
+                        <i class="fa fa-certificate mr-2"></i> Certificate
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-10">
+                
+                <!-- Left Side: Verification Forms -->
+                <div class="lg:col-span-5">
+                    
+                    <!-- Marksheet Form -->
+                    <div id="marksheet-form-section" class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 zone-card">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-4">Verify Marksheet</h3>
+                        <form id="resultForm" onsubmit="event.preventDefault(); verifyResult();">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Enrollment Number</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fa fa-id-card text-gray-400"></i>
+                                    </div>
+                                    <input type="text" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Ex: BESD/2025/001" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Date of Birth</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fa fa-calendar text-gray-400"></i>
+                                    </div>
+                                    <input type="date" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md">
+                                Search Result <i class="fa fa-search ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Certificate Form (Hidden by default) -->
+                    <div id="certificate-form-section" class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 zone-card hidden">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-4">Verify Certificate</h3>
+                        <form onsubmit="event.preventDefault(); alert('Certificate Verification System: Record Found! Valid Certificate.');">
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Certificate Serial No.</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fa fa-barcode text-gray-400"></i>
+                                    </div>
+                                    <input type="text" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Ex: CER-123456" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-yellow-500 text-white font-bold py-3 rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md">
+                                Verify Certificate <i class="fa fa-check-circle ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="mt-8 bg-blue-50 p-4 rounded-lg border border-blue-100 text-sm text-blue-800">
+                        <p class="font-bold mb-2"><i class="fa fa-info-circle mr-1"></i> Note:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Ensure you enter the correct Enrollment No. as printed on your ID card.</li>
+                            <li>Results are usually updated 30 days after the examination.</li>
+                            <li>For any discrepancy, contact your study center immediately.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Side: Result Display Area (Mockup) -->
+                <div class="lg:col-span-7">
+                    
+                    <!-- Default State -->
+                    <div id="result-placeholder" class="h-full flex flex-col items-center justify-center text-center p-12 bg-white rounded-xl border-2 border-dashed border-gray-300 text-gray-400">
+                        <i class="fa fa-search-location text-6xl mb-4 opacity-50"></i>
+                        <h4 class="text-xl font-semibold">No Result Displayed</h4>
+                        <p>Please enter your details and click search to view your Marksheet or Certificate.</p>
+                    </div>
+
+                    <!-- Marksheet Preview (Hidden initially) -->
+                    <div id="marksheet-preview" class="hidden bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+                        <div class="bg-indigo-600 text-white p-4 flex justify-between items-center">
+                            <h4 class="font-bold text-lg">Marksheet Preview</h4>
+                            <button onclick="closeResult()" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button>
+                        </div>
+                        
+                        <div class="p-6">
+                            <!-- Header of Marksheet -->
+                            <div class="text-center mb-6 border-b pb-4">
+                                <h2 class="text-2xl font-bold text-gray-900 uppercase">BESD Foundation</h2>
+                                <p class="text-sm text-gray-500">An ISO 9001:2015 Certified Organization</p>
+                                <h3 class="text-lg font-semibold text-indigo-600 mt-2">Statement of Marks</h3>
+                            </div>
+
+                            <!-- Student Details -->
+                            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                                <div>
+                                    <p class="text-gray-500">Student Name:</p>
+                                    <p class="font-bold text-gray-900">Rahul Kumar</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500">Enrollment No:</p>
+                                    <p class="font-bold text-gray-900">BESD/2025/001</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500">Course:</p>
+                                    <p class="font-bold text-gray-900">Advance Diploma in Computer Application (ADCA)</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500">Duration:</p>
+                                    <p class="font-bold text-gray-900">12 Months</p>
+                                </div>
+                            </div>
+
+                            <!-- Marks Table -->
+                            <div class="overflow-x-auto mb-6">
+                                <table class="w-full text-sm marksheet-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <th>Full Marks</th>
+                                            <th>Pass Marks</th>
+                                            <th>Obtained Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Computer Fundamentals & OS</td>
+                                            <td>100</td>
+                                            <td>40</td>
+                                            <td class="font-bold">85</td>
+                                        </tr>
+                                        <tr>
+                                            <td>MS Office Package</td>
+                                            <td>100</td>
+                                            <td>40</td>
+                                            <td class="font-bold">78</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programming in C / C++</td>
+                                            <td>100</td>
+                                            <td>40</td>
+                                            <td class="font-bold">82</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Practical / Viva</td>
+                                            <td>100</td>
+                                            <td>40</td>
+                                            <td class="font-bold">90</td>
+                                        </tr>
+                                        <tr class="bg-gray-50 font-bold">
+                                            <td class="text-right" colspan="3">Total Marks</td>
+                                            <td class="text-indigo-700">335 / 400</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Footer of Marksheet -->
+                            <div class="flex justify-between items-end mt-8">
+                                <div class="text-center">
+                                    <div class="h-16 w-32 bg-gray-100 mb-2 flex items-center justify-center text-xs text-gray-400 border border-dashed border-gray-300">QR Code</div>
+                                    <p class="text-xs text-gray-500">Scan to Verify</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="inline-block px-4 py-2 bg-green-100 text-green-800 rounded font-bold mb-2">Grade: A+</div>
+                                    <p class="text-xs text-gray-500">Result Date: 15 Jan 2025</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <button class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900 transition">
+                                    <i class="fa fa-print mr-2"></i> Print Marksheet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ======== FOOTER (Same as Index) ======== -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">BESD Foundation</h3>
+                    <p class="text-sm">Bambdeo Education and Social Development Foundation. Dedicated to education and social development.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="courses.html" class="hover:text-white">Courses</a></li>
+                        <li><a href="franchise.html" class="hover:text-white">Franchise</a></li>
+                        <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
+                        <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-home mr-3 mt-1 flex-shrink-0"></i>
+                            <span>[Your Address Here],<br>City, State - PIN</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-3"></i>
+                            <a href="tel:+911234567890" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                         <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-3"></i>
+                            <a href="https://wa.me/911234567890" target="_blank" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-3"></i>
+                            <a href="mailto:info@besdfoundation.com" class="hover:text-white">info@besdfoundation.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                     <h3 class="text-lg font-semibold text-white mb-4">Home</h3>
+                     <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Go to Homepage</a></li>
+                     </ul>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-gray-800 pt-6 text-center text-sm">
+                <p>&copy; 2025 BESD Foundation. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts for Interaction -->
+    <script>
+        // Mobile Menu Logic
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if(menuButton){
+            menuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.toggle('hidden');
+                if (isMenuOpen) {
+                    menuIcon.className = 'fa fa-bars fa-lg';
+                } else {
+                    menuIcon.className = 'fa fa-times fa-lg';
+                }
+            });
+        }
+
+        // Function to switch between Marksheet and Certificate forms
+        function showSection(type) {
+            const marksheetForm = document.getElementById('marksheet-form-section');
+            const certificateForm = document.getElementById('certificate-form-section');
+            const btnMarksheet = document.getElementById('btn-marksheet');
+            const btnCertificate = document.getElementById('btn-certificate');
+            
+            // Reset Result view
+            closeResult();
+
+            if (type === 'marksheet') {
+                marksheetForm.classList.remove('hidden');
+                certificateForm.classList.add('hidden');
+                
+                // Button Styling
+                btnMarksheet.classList.add('bg-indigo-600', 'text-white');
+                btnMarksheet.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                
+                btnCertificate.classList.remove('bg-indigo-600', 'text-white');
+                btnCertificate.classList.add('text-gray-600', 'hover:bg-gray-100');
+            } else {
+                marksheetForm.classList.add('hidden');
+                certificateForm.classList.remove('hidden');
+                
+                // Button Styling
+                btnCertificate.classList.add('bg-indigo-600', 'text-white');
+                btnCertificate.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                
+                btnMarksheet.classList.remove('bg-indigo-600', 'text-white');
+                btnMarksheet.classList.add('text-gray-600', 'hover:bg-gray-100');
+            }
+        }
+
+        // Function to simulate checking result
+        function verifyResult() {
+            const placeholder = document.getElementById('result-placeholder');
+            const preview = document.getElementById('marksheet-preview');
+            
+            // Show a loading effect (optional) or simple switch
+            placeholder.classList.add('hidden');
+            preview.classList.remove('hidden');
+        }
+
+        // Function to close result view
+        function closeResult() {
+            const placeholder = document.getElementById('result-placeholder');
+            const preview = document.getElementById('marksheet-preview');
+            
+            placeholder.classList.remove('hidden');
+            preview.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

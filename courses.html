@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Courses - BESD Foundation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Consistent Gradient Background */
+        .page-header-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header-bg::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 60%);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .header-content { position: relative; z-index: 1; }
+
+        /* Card Hover Effect */
+        .course-card {
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- ======== HEADER / NAVIGATION BAR ======== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-indigo-700">
+                        BESD <span class="text-gray-700">FOUNDATION</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">About Us</a>
+                    <a href="courses.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-600 px-2 py-1">Courses</a>
+                    <a href="faculty.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Faculty</a>
+                    <a href="franchise.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Franchise</a>
+                    <a href="study_center.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Study Center</a>
+                    <a href="gallery.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Gallery</a>
+                    <a href="download.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Download</a>
+                </div>
+                
+                <!-- Student Zone Button -->
+                <div class="hidden md:block">
+                    <a href="student_zone.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
+                        <i class="fa fa-user-graduate mr-2"></i> Student Zone
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        <i class="fa fa-bars fa-lg" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+                <a href="courses.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
+                <a href="faculty.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
+                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
+                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
+                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
+            </div>
+             <div class="px-4 pb-4">
+                 <a href="student_zone.html" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
+                    <i class="fa fa-user-graduate mr-2"></i> Student Zone
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======== PAGE HEADER ======== -->
+    <div class="page-header-bg py-16 lg:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 header-content text-center">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Our Programs & Courses</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-indigo-100">
+                Skill-based education designed to make you industry-ready. Choose the right path for your career.
+            </p>
+        </div>
+    </div>
+
+    <!-- ======== MAIN CONTENT (Courses List) ======== -->
+    <main class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- SECTION 1: COMPUTER COURSES -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="w-1 h-8 bg-indigo-600 mr-3 rounded"></div>
+                    <h2 class="text-2xl font-bold text-gray-900">Computer Education</h2>
+                </div>
+                
+                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    
+                    <!-- Course 1: ADCA -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-indigo-100 flex items-center justify-center">
+                            <i class="fa fa-laptop-code text-6xl text-indigo-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Diploma</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 12 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">ADCA (Advance Diploma in Computer Application)</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Complete computer training including Office, Tally, DTP, Internet, and Programming basics.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 2: DCA -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-blue-100 flex items-center justify-center">
+                            <i class="fa fa-desktop text-6xl text-blue-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Diploma</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 6 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">DCA (Diploma in Computer Application)</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Fundamental computer course covering MS Office, Operating Systems, and Internet basics.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 3: DTP -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-pink-100 flex items-center justify-center">
+                            <i class="fa fa-paint-brush text-6xl text-pink-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Certificate</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 3 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">DTP (Desktop Publishing)</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Learn graphic design tools like Photoshop, CorelDraw, and PageMaker for print media.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 4: Tally Prime -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-yellow-100 flex items-center justify-center">
+                            <i class="fa fa-calculator text-6xl text-yellow-600"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Certificate</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 3 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Tally Prime with GST</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Professional accounting course covering Tally Prime, Inventory Management, and GST filing.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: VOCATIONAL COURSES -->
+            <div>
+                <div class="flex items-center mb-8">
+                    <div class="w-1 h-8 bg-yellow-500 mr-3 rounded"></div>
+                    <h2 class="text-2xl font-bold text-gray-900">Vocational Training</h2>
+                </div>
+                
+                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Course 5: Typing -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <i class="fa fa-keyboard text-6xl text-gray-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-gray-200 text-gray-800 text-xs font-semibold rounded-full">Skill</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 3/6 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Hindi & English Typing</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Increase your typing speed and accuracy for government jobs and data entry work.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+
+                     <!-- Course 6: Tailoring -->
+                     <div class="bg-white rounded-xl shadow-sm overflow-hidden course-card border border-gray-100">
+                        <div class="h-40 bg-purple-100 flex items-center justify-center">
+                            <i class="fa fa-cut text-6xl text-purple-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Diploma</span>
+                                <span class="text-gray-500 text-sm"><i class="far fa-clock mr-1"></i> 6 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Fashion Designing / Tailoring</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Learn the art of cutting, stitching, and designing clothes to become self-employed.</p>
+                            <button class="w-full block text-center py-2 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition">View Syllabus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ======== FOOTER (Same as Index) ======== -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">BESD Foundation</h3>
+                    <p class="text-sm">Bambdeo Education and Social Development Foundation. Dedicated to education and social development.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="courses.html" class="hover:text-white text-indigo-400">Courses</a></li>
+                        <li><a href="franchise.html" class="hover:text-white">Franchise</a></li>
+                        <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
+                        <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-home mr-3 mt-1 flex-shrink-0"></i>
+                            <span>[Your Address Here],<br>City, State - PIN</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-3"></i>
+                            <a href="tel:+911234567890" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                         <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-3"></i>
+                            <a href="https://wa.me/911234567890" target="_blank" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-3"></i>
+                            <a href="mailto:info@besdfoundation.com" class="hover:text-white">info@besdfoundation.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                     <h3 class="text-lg font-semibold text-white mb-4">Home</h3>
+                     <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Go to Homepage</a></li>
+                     </ul>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-gray-800 pt-6 text-center text-sm">
+                <p>&copy; 2025 BESD Foundation. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for Mobile Menu -->
+    <script>
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if(menuButton){
+            menuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.toggle('hidden');
+                if (isMenuOpen) {
+                    menuIcon.className = 'fa fa-bars fa-lg';
+                } else {
+                    menuIcon.className = 'fa fa-times fa-lg';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
