@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Faculty - BESD Admin</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Inter', sans-serif; }
         .sidebar-link.active { background-color: #4F46E5; color: white; }
         .sidebar-link:hover:not(.active) { background-color: #1F2937; color: #fff; }
         #facultyModal { backdrop-filter: blur(5px); }
+        
+        /* Loader */
+        .loader { border-top-color: #3498db; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-gray-100">
+
     <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-gray-400 flex flex-col hidden md:flex">
             <div class="h-16 flex items-center justify-center border-b border-gray-800"><h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1></div>
             <nav class="flex-1 overflow-y-auto py-4">
@@ -35,30 +44,312 @@
             </nav>
         </aside>
 
+        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
                 <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Faculty</h2></div>
                 <div class="flex items-center space-x-4"><div class="flex items-center space-x-2"><img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100"><span class="text-gray-700 font-medium text-sm">Super Admin</span></div></div>
             </header>
+            
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                
+                <!-- Action Bar -->
                 <div class="flex justify-between items-center mb-6">
-                    <button onclick="document.getElementById('facultyModal').classList.remove('hidden')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center"><i class="fa fa-user-plus mr-2"></i> Add New Faculty</button>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search faculty..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
+                        <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <button onclick="openModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center">
+                        <i class="fa fa-user-plus mr-2"></i> Add New Faculty
+                    </button>
                 </div>
+
+                <!-- Faculty Table -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table class="w-full text-left text-sm text-gray-600">
-                        <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs"><tr><th class="px-6 py-4">Name</th><th class="px-6 py-4">Designation</th><th class="px-6 py-4">Status</th><th class="px-6 py-4 text-right">Actions</th></tr></thead>
-                        <tbody class="divide-y divide-gray-200"><tr class="hover:bg-gray-50"><td class="px-6 py-4 font-medium text-gray-900">Amit Singh</td><td class="px-6 py-4">Instructor</td><td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-semibold">Active</span></td><td class="px-6 py-4 text-right"><button class="text-indigo-600"><i class="fa fa-edit"></i></button></td></tr></tbody>
+                        <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs">
+                            <tr>
+                                <th class="px-6 py-4">Name</th>
+                                <th class="px-6 py-4">Designation</th>
+                                <th class="px-6 py-4">Qualification</th>
+                                <th class="px-6 py-4">Experience</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultyTableBody" class="divide-y divide-gray-200">
+                            <tr><td colspan="6" class="text-center py-4">Loading faculty data...</td></tr>
+                        </tbody>
                     </table>
                 </div>
+
             </main>
         </div>
     </div>
-     <!-- Modal -->
+
+    <!-- ================= ADD/EDIT MODAL ================= -->
     <div id="facultyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4">
-            <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center"><h3 class="text-white font-bold text-lg">Add Faculty</h3><button onclick="document.getElementById('facultyModal').classList.add('hidden')" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button></div>
-            <form class="p-6" onsubmit="event.preventDefault(); alert('Saved!'); document.getElementById('facultyModal').classList.add('hidden');"><div class="grid gap-4"><div><label class="block text-gray-700 text-sm font-bold mb-2">Name</label><input type="text" class="w-full border border-gray-300 rounded-lg p-2" required></div></div><div class="mt-6 flex justify-end space-x-3"><button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">Save</button></div></form>
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4 transform transition-all h-auto max-h-[90vh] overflow-y-auto">
+            <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center sticky top-0 z-10">
+                <h3 class="text-white font-bold text-lg" id="modalTitle">Add New Faculty</h3>
+                <button onclick="closeModal()" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button>
+            </div>
+            
+            <form id="facultyForm" class="p-6">
+                <input type="hidden" id="facultyId"> <!-- Hidden ID for Editing -->
+                <input type="hidden" id="existingImageUrl"> <!-- Store old image URL -->
+
+                <div class="grid gap-4">
+                    
+                    <!-- Image Upload -->
+                    <div class="flex justify-center mb-4">
+                        <div class="relative cursor-pointer group" onclick="document.getElementById('fileInput').click()">
+                            <img id="imagePreview" src="https://placehold.co/100x100/e2e8f0/475569?text=Image" class="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white">
+                                <i class="fa fa-camera"></i>
+                            </div>
+                            <input type="file" id="fileInput" class="hidden" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
+                        <input type="text" id="facultyName" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Designation</label>
+                            <input type="text" id="facultyDesignation" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: Senior Instructor">
+                        </div>
+                        <div>
+                             <label class="block text-gray-700 text-sm font-bold mb-2">Experience</label>
+                             <input type="text" id="facultyExp" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: 5 Years">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Qualification</label>
+                        <input type="text" id="facultyQual" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: MCA, B.Tech">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Specialization / Skills</label>
+                        <textarea id="facultySkills" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="2" placeholder="Ex: Java, Python, Web Design"></textarea>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="border-t pt-4 mt-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Social Links (Optional)</label>
+                        <div class="flex items-center mb-2">
+                            <i class="fab fa-linkedin text-blue-700 mr-2 w-6 text-center"></i>
+                            <input type="text" id="linkLinkedin" class="w-full border border-gray-300 rounded p-1.5 text-sm focus:outline-none" placeholder="LinkedIn URL">
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fab fa-twitter text-blue-400 mr-2 w-6 text-center"></i>
+                            <input type="text" id="linkTwitter" class="w-full border border-gray-300 rounded p-1.5 text-sm focus:outline-none" placeholder="Twitter URL">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end space-x-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>
+                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md flex items-center">
+                        <span>Save Faculty</span>
+                        <div id="btnLoader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+
+    <!-- Firebase & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+        const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY"; // Replace with your key
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const facultyCollection = collection(db, "faculty");
+
+        let allFaculty = [];
+
+        // --- IMAGE PREVIEW ---
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if(e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) { document.getElementById('imagePreview').src = e.target.result; }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // --- LOAD DATA ---
+        async function loadFaculty() {
+            const tbody = document.getElementById('facultyTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Loading...</td></tr>';
+
+            try {
+                const q = query(facultyCollection, orderBy("name"));
+                const querySnapshot = await getDocs(q);
+                
+                tbody.innerHTML = ""; 
+                allFaculty = [];
+
+                if (querySnapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No faculty members found. Add one!</td></tr>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    allFaculty.push({ id: doc.id, ...data });
+                    renderRow(doc.id, data);
+                });
+
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error loading data.</td></tr>';
+            }
+        }
+
+        function renderRow(id, data) {
+            const tbody = document.getElementById('facultyTableBody');
+            const imgUrl = data.imageUrl || "https://placehold.co/100x100/e2e8f0/475569?text=User";
+            
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-gray-50 border-b border-gray-100";
+            tr.innerHTML = `
+                <td class="px-6 py-4 font-medium text-gray-900">
+                    <div class="flex items-center">
+                        <img class="h-10 w-10 rounded-full object-cover mr-3" src="${imgUrl}" alt="Avatar">
+                        <div>
+                            <div class="font-bold">${data.name}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4">${data.designation}</td>
+                <td class="px-6 py-4">${data.qualification}</td>
+                <td class="px-6 py-4">${data.experience}</td>
+                <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-semibold">Active</span></td>
+                <td class="px-6 py-4 text-right space-x-2">
+                    <button class="edit-btn text-indigo-600 hover:text-indigo-900" data-id="${id}"><i class="fa fa-edit"></i></button>
+                    <button class="delete-btn text-red-600 hover:text-red-900" data-id="${id}"><i class="fa fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        // --- SAVE (ADD/EDIT) ---
+        document.getElementById('facultyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = document.getElementById('saveBtn');
+            const loader = document.getElementById('btnLoader');
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+
+            const file = document.getElementById('fileInput').files[0];
+            const facultyId = document.getElementById('facultyId').value;
+            let imageUrl = document.getElementById('existingImageUrl').value;
+
+            try {
+                // Upload Image to ImgBB if new file selected
+                if (file) {
+                    const formData = new FormData();
+                    formData.append("image", file);
+                    const imgResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
+                    const imgData = await imgResponse.json();
+                    if(imgData.success) imageUrl = imgData.data.url;
+                }
+
+                const facultyData = {
+                    name: document.getElementById('facultyName').value,
+                    designation: document.getElementById('facultyDesignation').value,
+                    experience: document.getElementById('facultyExp').value,
+                    qualification: document.getElementById('facultyQual').value,
+                    skills: document.getElementById('facultySkills').value,
+                    linkedin: document.getElementById('linkLinkedin').value,
+                    twitter: document.getElementById('linkTwitter').value,
+                    imageUrl: imageUrl
+                };
+
+                if (facultyId) {
+                    await updateDoc(doc(db, "faculty", facultyId), facultyData);
+                    alert("Faculty Updated!");
+                } else {
+                    await addDoc(facultyCollection, facultyData);
+                    alert("Faculty Added!");
+                }
+                
+                closeModal();
+                loadFaculty(); 
+
+            } catch (error) {
+                console.error(error);
+                alert("Error: " + error.message);
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // --- EVENT DELEGATION ---
+        document.getElementById('facultyTableBody').addEventListener('click', async (e) => {
+            // Delete
+            if(e.target.closest('.delete-btn')) {
+                const id = e.target.closest('.delete-btn').getAttribute('data-id');
+                if(confirm("Delete this faculty member?")) {
+                    await deleteDoc(doc(db, "faculty", id));
+                    loadFaculty();
+                }
+            }
+            // Edit
+            if(e.target.closest('.edit-btn')) {
+                const id = e.target.closest('.edit-btn').getAttribute('data-id');
+                const fac = allFaculty.find(f => f.id === id);
+                if(fac) {
+                    document.getElementById('facultyId').value = fac.id;
+                    document.getElementById('facultyName').value = fac.name;
+                    document.getElementById('facultyDesignation').value = fac.designation;
+                    document.getElementById('facultyExp').value = fac.experience;
+                    document.getElementById('facultyQual').value = fac.qualification;
+                    document.getElementById('facultySkills').value = fac.skills || "";
+                    document.getElementById('linkLinkedin').value = fac.linkedin || "";
+                    document.getElementById('linkTwitter').value = fac.twitter || "";
+                    document.getElementById('existingImageUrl').value = fac.imageUrl || "";
+                    document.getElementById('imagePreview').src = fac.imageUrl || "https://placehold.co/100x100/e2e8f0/475569?text=Image";
+                    
+                    document.getElementById('modalTitle').innerText = "Edit Faculty";
+                    document.getElementById('facultyModal').classList.remove('hidden');
+                }
+            }
+        });
+
+        window.openModal = () => {
+            document.getElementById('facultyForm').reset();
+            document.getElementById('facultyId').value = "";
+            document.getElementById('existingImageUrl').value = "";
+            document.getElementById('imagePreview').src = "https://placehold.co/100x100/e2e8f0/475569?text=Image";
+            document.getElementById('modalTitle').innerText = "Add New Faculty";
+            document.getElementById('facultyModal').classList.remove('hidden');
+        };
+
+        window.closeModal = () => {
+            document.getElementById('facultyModal').classList.add('hidden');
+        };
+
+        loadFaculty();
+    </script>
 </body>
 </html>
