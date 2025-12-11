@@ -17,7 +17,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        /* Consistent Gradient Background from Index page */
+        /* Consistent Gradient Background */
         .page-header-bg {
             background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
             position: relative;
@@ -42,18 +42,15 @@
 </head>
 <body class="bg-gray-50">
 
-    <!-- ======== HEADER / NAVIGATION BAR (Same as Index) ======== -->
+    <!-- ======== HEADER ======== -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="index.html" class="text-xl font-bold text-indigo-700">
                         BESD <span class="text-gray-700">FOUNDATION</span>
                     </a>
                 </div>
-                
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
                     <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Home</a>
                     <a href="about.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-600 px-2 py-1">About Us</a>
@@ -64,15 +61,11 @@
                     <a href="gallery.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Gallery</a>
                     <a href="download.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Download</a>
                 </div>
-                
-                <!-- Student Zone Button -->
                 <div class="hidden md:block">
                     <a href="student_zone.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
                         <i class="fa fa-user-graduate mr-2"></i> Student Zone
                     </a>
                 </div>
-                
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none">
                         <i class="fa fa-bars fa-lg" id="menu-icon"></i>
@@ -80,23 +73,12 @@
                 </div>
             </div>
         </nav>
-
-        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="about.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
                 <a href="courses.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
-                <a href="faculty.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
-                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
-                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
-                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
-                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
-            </div>
-             <div class="px-4 pb-4">
-                 <a href="student_zone.html" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
-                    <i class="fa fa-user-graduate mr-2"></i> Student Zone
-                </a>
+                <a href="student_zone.html" class="block w-full text-center px-4 py-2 mt-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">Student Zone</a>
             </div>
         </div>
     </header>
@@ -117,8 +99,9 @@
             <!-- Section 1: Who We Are -->
             <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center mb-20">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Who We Are</h2>
-                    <div class="prose prose-lg text-gray-600">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6" id="main-title">Who We Are</h2>
+                    <div class="prose prose-lg text-gray-600" id="main-desc">
+                        <!-- Default Static Content -->
                         <p class="mb-4">
                             The <strong>Bambdeo Education and Social Development Foundation (BESD)</strong> is a registered non-profit organization dedicated to bridging the gap between ambition and opportunity. Established with the vision of creating an educated and self-reliant society, we focus on providing high-quality vocational and computer education to students from all walks of life.
                         </p>
@@ -140,7 +123,7 @@
                         <i class="fa fa-bullseye text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600" id="mission-text">
                         To provide affordable, accessible, and industry-relevant education to empower the youth and contribute to nation-building.
                     </p>
                 </div>
@@ -151,7 +134,7 @@
                         <i class="fa fa-lightbulb text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">Our Vision</h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600" id="vision-text">
                         To become a leading organization in the field of skill development and social welfare, creating a knowledgeable and skilled society.
                     </p>
                 </div>
@@ -171,115 +154,129 @@
             <!-- Section 3: Objectives List -->
             <div class="bg-indigo-50 rounded-2xl p-8 lg:p-12">
                 <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Our Key Objectives</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Promote computer literacy in rural and urban areas.</p>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Provide vocational training for employment generation.</p>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Organize social awareness camps for health and education.</p>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Empower women and underprivileged sections of society.</p>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Collaborate with government and other NGOs for development projects.</p>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i>
-                        <p class="text-gray-700">Establish study centers to reach remote locations.</p>
-                    </div>
+                <div class="grid md:grid-cols-2 gap-6" id="objectives-list">
+                    <!-- Static Fallback Content -->
+                    <div class="flex items-start"><i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i><p class="text-gray-700">Promote computer literacy in rural and urban areas.</p></div>
+                    <div class="flex items-start"><i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i><p class="text-gray-700">Provide vocational training for employment generation.</p></div>
+                    <div class="flex items-start"><i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i><p class="text-gray-700">Organize social awareness camps for health and education.</p></div>
+                    <div class="flex items-start"><i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i><p class="text-gray-700">Empower women and underprivileged sections of society.</p></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- ======== FOOTER (Same as Index) ======== -->
-    <footer class="bg-gray-900 text-gray-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Column 1 -->
+    <!-- ======== FOOTER ======== -->
+    <footer class="bg-gray-800 text-gray-300 border-t border-gray-700">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-lg font-semibold text-white mb-4">BESD Foundation</h3>
-                    <p class="text-sm">Bambdeo Education and Social Development Foundation. Dedicated to education and social development.</p>
-                    <div class="flex space-x-4 mt-4">
+                    <h3 class="text-white font-bold text-lg mb-4">BESD Foundation</h3>
+                    <p class="text-sm">Empowering society through education and skill development.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="courses.html" class="hover:text-white">Courses</a></li>
+                        <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
+                        <li><a href="student_zone.html" class="hover:text-white">Student Zone</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa fa-phone mr-2"></i> +91 98765 43210</li>
+                        <li><i class="fa fa-envelope mr-2"></i> info@besdfoundation.com</li>
+                        <li><i class="fa fa-map-marker-alt mr-2"></i> Patna, Bihar, India</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-
-                <!-- Column 2 -->
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="about.html" class="hover:text-white text-indigo-400">About Us</a></li>
-                        <li><a href="courses.html" class="hover:text-white">Courses</a></li>
-                        <li><a href="franchise.html" class="hover:text-white">Franchise</a></li>
-                        <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
-                        <li><a href="gallery.html" class="hover:text-white">Gallery</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3 -->
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
-                    <ul class="space-y-3 text-sm">
-                        <li class="flex items-start">
-                            <i class="fa fa-home mr-3 mt-1 flex-shrink-0"></i>
-                            <span>[Your Address Here],<br>City, State - PIN</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-phone mr-3"></i>
-                            <a href="tel:+911234567890" class="hover:text-white">+91 12345 67890</a>
-                        </li>
-                         <li class="flex items-center">
-                            <i class="fab fa-whatsapp mr-3"></i>
-                            <a href="https://wa.me/911234567890" target="_blank" class="hover:text-white">+91 12345 67890</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope mr-3"></i>
-                            <a href="mailto:info@besdfoundation.com" class="hover:text-white">info@besdfoundation.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Column 4 -->
-                <div>
-                     <h3 class="text-lg font-semibold text-white mb-4">Home</h3>
-                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="hover:text-white">Go to Homepage</a></li>
-                     </ul>
-                </div>
             </div>
-            <div class="mt-10 border-t border-gray-800 pt-6 text-center text-sm">
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm">
                 <p>&copy; 2025 BESD Foundation. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Script for Mobile Menu -->
-    <script>
+    <!-- ======== FIREBASE SCRIPT ======== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- FETCH ABOUT CONTENT ---
+        async function loadAboutContent() {
+            try {
+                // Fetching from collection "site_content", document "about"
+                const docRef = doc(db, "site_content", "about");
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+
+                    // 1. Update Title & Description
+                    if(data.mainTitle) document.getElementById('main-title').innerText = data.mainTitle;
+                    if(data.mainDescription) document.getElementById('main-desc').innerHTML = data.mainDescription; // innerHTML to allow paragraphs
+
+                    // 2. Update Mission & Vision
+                    if(data.mission) document.getElementById('mission-text').innerText = data.mission;
+                    if(data.vision) document.getElementById('vision-text').innerText = data.vision;
+
+                    // 3. Update Objectives List
+                    if(data.objectives && Array.isArray(data.objectives) && data.objectives.length > 0) {
+                        const objList = document.getElementById('objectives-list');
+                        objList.innerHTML = ""; // Clear static list
+                        data.objectives.forEach(obj => {
+                            const div = document.createElement('div');
+                            div.className = "flex items-start";
+                            div.innerHTML = `<i class="fa fa-check-circle text-indigo-600 mt-1 mr-3"></i><p class="text-gray-700">${obj}</p>`;
+                            objList.appendChild(div);
+                        });
+                    }
+                } else {
+                    console.log("No dynamic content found, showing static fallback.");
+                }
+            } catch (error) {
+                console.error("Error loading about content:", error);
+            }
+        }
+
+        // Mobile Menu Toggle
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
+        if(menuButton){
+            menuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.toggle('hidden');
+                if (isMenuOpen) {
+                    menuIcon.className = 'fa fa-bars fa-lg';
+                } else {
+                    menuIcon.className = 'fa fa-times fa-lg';
+                }
+            });
+        }
 
-        menuButton.addEventListener('click', () => {
-            const isMenuOpen = mobileMenu.classList.toggle('hidden');
-            if (isMenuOpen) {
-                menuIcon.className = 'fa fa-bars fa-lg';
-            } else {
-                menuIcon.className = 'fa fa-times fa-lg';
-            }
-        });
+        // Initialize
+        loadAboutContent();
     </script>
 </body>
 </html>
