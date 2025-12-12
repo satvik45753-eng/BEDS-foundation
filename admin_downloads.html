@@ -7,38 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .sidebar-link.active { background-color: #4F46E5; color: white; }
-        .sidebar-link:hover:not(.active) { background-color: #1F2937; color: #fff; }
-        #uploadModal { backdrop-filter: blur(5px); }
-    </style>
+    <style>body{font-family:'Inter',sans-serif}.sidebar-link.active{background-color:#4F46E5;color:white}.sidebar-link:hover:not(.active){background-color:#1F2937;color:#fff}#uploadModal{backdrop-filter:blur(5px)}.loader{border-top-color:#ffffff;animation:spinner 1.5s linear infinite}@keyframes spinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}</style>
 </head>
 <body class="bg-gray-100">
-
     <div class="flex h-screen overflow-hidden">
-        
-        <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-gray-400 flex flex-col hidden md:flex">
             <div class="h-16 flex items-center justify-center border-b border-gray-800"><h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1></div>
             <nav class="flex-1 overflow-y-auto py-4">
                 <ul class="space-y-1 px-2">
                     <li><a href="dashboard.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-tachometer-alt w-6"></i><span>Dashboard</span></a></li>
-                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Content Management</li>
                     <li><a href="admin_about.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-info-circle w-6"></i><span>About Us</span></a></li>
                     <li><a href="admin_courses.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-book-open w-6"></i><span>Courses</span></a></li>
                     <li><a href="admin_faculty.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-chalkboard-teacher w-6"></i><span>Faculty</span></a></li>
                     <li><a href="admin_gallery.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-images w-6"></i><span>Gallery</span></a></li>
                     <li><a href="admin_downloads.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-download w-6"></i><span>Downloads</span></a></li>
-                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Network & Students</li>
                     <li><a href="admin_franchise.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-briefcase w-6"></i><span>Franchise</span></a></li>
                     <li><a href="admin_study_centers.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-building w-6"></i><span>Study Centers</span></a></li>
                     <li><a href="admin_student_zone.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-user-graduate w-6"></i><span>Student Zone</span></a></li>
                 </ul>
             </nav>
         </aside>
-
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
                 <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Downloads</h2></div>
@@ -46,24 +34,131 @@
             </header>
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center"><i class="fa fa-file-upload mr-2"></i> Upload New File</button>
+                    <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center"><i class="fa fa-file-upload mr-2"></i> Add New File</button>
                 </div>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table class="w-full text-left text-sm text-gray-600">
-                        <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs"><tr><th class="px-6 py-4">File Name</th><th class="px-6 py-4">Category</th><th class="px-6 py-4">Size</th><th class="px-6 py-4 text-right">Actions</th></tr></thead>
-                        <tbody class="divide-y divide-gray-200"><tr class="hover:bg-gray-50"><td class="px-6 py-4 font-medium text-gray-900">Admission Form 2025</td><td class="px-6 py-4">Student</td><td class="px-6 py-4">1.2 MB</td><td class="px-6 py-4 text-right"><button class="text-red-600"><i class="fa fa-trash"></i></button></td></tr></tbody>
+                        <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs"><tr><th class="px-6 py-4">File Name</th><th class="px-6 py-4">Category</th><th class="px-6 py-4">Type</th><th class="px-6 py-4 text-right">Actions</th></tr></thead>
+                        <tbody id="filesTableBody" class="divide-y divide-gray-200"><tr><td colspan="4" class="text-center py-4">Loading...</td></tr></tbody>
                     </table>
                 </div>
             </main>
         </div>
     </div>
     
-    <!-- Modal -->
     <div id="uploadModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
-            <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center"><h3 class="text-white font-bold text-lg">Upload Resource</h3><button onclick="document.getElementById('uploadModal').classList.add('hidden')" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button></div>
-            <form class="p-6" onsubmit="event.preventDefault(); alert('Uploaded!'); document.getElementById('uploadModal').classList.add('hidden');"><div class="grid gap-4"><div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer"><i class="fa fa-file-import text-4xl text-gray-400 mb-2"></i><p class="text-sm text-gray-500">Click to select file</p></div><div><label class="block text-gray-700 text-sm font-bold mb-2">File Name</label><input type="text" class="w-full border border-gray-300 rounded-lg p-2" required></div></div><div class="mt-6 flex justify-end space-x-3"><button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">Upload</button></div></form>
+            <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center"><h3 class="text-white font-bold text-lg">Add Resource</h3><button onclick="document.getElementById('uploadModal').classList.add('hidden')" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button></div>
+            <form id="uploadForm" class="p-6">
+                <div class="grid gap-4">
+                    <input type="text" id="fileName" class="w-full border border-gray-300 rounded p-2" placeholder="File Title (e.g. Admission Form)" required>
+                    <select id="fileCategory" class="w-full border border-gray-300 rounded p-2">
+                        <option value="Student">Student Resource</option>
+                        <option value="Franchise">Franchise Resource</option>
+                        <option value="Sample Paper">Sample Paper</option>
+                    </select>
+                    
+                    <!-- Option 1: URL -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">Option 1: External Link (PDF/Doc)</label>
+                        <input type="url" id="fileUrl" class="w-full border border-gray-300 rounded p-2" placeholder="Paste Google Drive/Dropbox Link">
+                    </div>
+
+                    <!-- Option 2: Image Upload -->
+                    <div class="text-center text-xs text-gray-400 font-bold">- OR -</div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">Option 2: Upload Image (Notice/Form)</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded p-4 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()">
+                            <i class="fa fa-image text-gray-400"></i> <span id="fileNameDisplay" class="text-sm text-gray-500">Select Image</span>
+                            <input type="file" id="fileInput" class="hidden" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-indigo-600 text-white rounded flex items-center justify-center"><span id="btnText">Save</span><div id="btnLoader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div></button>
+                </div>
+            </form>
         </div>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
+        };
+        const IMGBB_API_KEY = "2e29f3711c9d4cdcffbb7fd7d407a1a7";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const colRef = collection(db, "downloads");
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            if(e.target.files[0]) document.getElementById('fileNameDisplay').innerText = e.target.files[0].name;
+        });
+
+        async function loadFiles() {
+            const tbody = document.getElementById('filesTableBody');
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4">Loading...</td></tr>';
+            try {
+                const q = query(colRef, orderBy("timestamp", "desc"));
+                const snapshot = await getDocs(q);
+                tbody.innerHTML = "";
+                if(snapshot.empty) { tbody.innerHTML = '<tr><td colspan="4" class="text-center text-gray-500">No files.</td></tr>'; return; }
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    let icon = 'fa-link text-blue-500';
+                    if(data.type === 'Image') icon = 'fa-image text-green-500';
+                    tbody.innerHTML += `<tr class="hover:bg-gray-50 border-b"><td class="px-6 py-4 font-medium flex items-center"><i class="fa ${icon} mr-3"></i>${data.name}</td><td class="px-6 py-4"><span class="bg-gray-100 px-2 py-1 rounded text-xs">${data.category}</span></td><td class="px-6 py-4 text-sm">${data.type}</td><td class="px-6 py-4 text-right"><a href="${data.url}" target="_blank" class="text-blue-500 mr-3"><i class="fa fa-external-link-alt"></i></a><button class="delete-btn text-red-600" data-id="${doc.id}"><i class="fa fa-trash"></i></button></td></tr>`;
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', async () => {
+                        if(confirm("Delete?")) { await deleteDoc(doc(db, "downloads", btn.getAttribute('data-id'))); loadFiles(); }
+                    });
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveBtn'); 
+            const loader = document.getElementById('btnLoader');
+            btn.disabled = true; loader.classList.remove('hidden');
+
+            const name = document.getElementById('fileName').value;
+            const category = document.getElementById('fileCategory').value;
+            const urlInput = document.getElementById('fileUrl').value;
+            const fileInput = document.getElementById('fileInput').files[0];
+            
+            let finalUrl = urlInput;
+            let type = "Link/PDF";
+
+            try {
+                if (fileInput) {
+                    const formData = new FormData(); formData.append("image", fileInput);
+                    const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
+                    const json = await res.json();
+                    if(json.success) { finalUrl = json.data.url; type = "Image"; }
+                }
+
+                if(!finalUrl) { alert("Please provide a Link or Upload an Image"); return; }
+
+                await addDoc(colRef, { name, category, url: finalUrl, type, timestamp: new Date() });
+                alert("Success!"); document.getElementById('uploadForm').reset(); document.getElementById('uploadModal').classList.add('hidden'); loadFiles();
+            } catch (e) { console.error(e); alert("Error"); } 
+            finally { btn.disabled = false; loader.classList.add('hidden'); }
+        });
+
+        loadFiles();
+    </script>
 </body>
 </html>
