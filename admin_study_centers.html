@@ -5,171 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Study Centers - BESD Admin</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Inter', sans-serif; }
-        
-        /* Sidebar Active Link */
-        .sidebar-link.active {
-            background-color: #4F46E5;
-            color: white;
-        }
-        .sidebar-link:hover:not(.active) {
-            background-color: #1F2937;
-            color: #fff;
-        }
-
-        /* Modal Background */
-        #centerModal {
-            backdrop-filter: blur(5px);
-        }
+        .sidebar-link.active { background-color: #4F46E5; color: white; }
+        .sidebar-link:hover:not(.active) { background-color: #1F2937; color: #fff; }
+        #centerModal { backdrop-filter: blur(5px); }
+        .loader { border-top-color: #3498db; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-gray-100">
 
     <div class="flex h-screen overflow-hidden">
         
-        <!-- Sidebar (Consistent) -->
+        <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-gray-400 flex flex-col hidden md:flex">
-            <div class="h-16 flex items-center justify-center border-b border-gray-800">
-                <h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1>
-            </div>
-            
+            <div class="h-16 flex items-center justify-center border-b border-gray-800"><h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1></div>
             <nav class="flex-1 overflow-y-auto py-4">
                 <ul class="space-y-1 px-2">
-                    <li>
-                        <a href="dashboard.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-tachometer-alt w-6"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+                    <li><a href="dashboard.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-tachometer-alt w-6"></i><span>Dashboard</span></a></li>
                     <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Content Management</li>
-                    <li>
-                        <a href="admin_about.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-info-circle w-6"></i>
-                            <span>About Us</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="admin_courses.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-book-open w-6"></i>
-                            <span>Courses</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="admin_faculty.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-chalkboard-teacher w-6"></i>
-                            <span>Faculty</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="admin_gallery.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-images w-6"></i>
-                            <span>Gallery</span>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="admin_downloads.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-download w-6"></i>
-                            <span>Downloads</span>
-                        </a>
-                    </li>
+                    <li><a href="admin_about.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-info-circle w-6"></i><span>About Us</span></a></li>
+                    <li><a href="admin_courses.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-book-open w-6"></i><span>Courses</span></a></li>
+                    <li><a href="admin_faculty.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-chalkboard-teacher w-6"></i><span>Faculty</span></a></li>
+                    <li><a href="admin_gallery.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-images w-6"></i><span>Gallery</span></a></li>
+                    <li><a href="admin_downloads.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-download w-6"></i><span>Downloads</span></a></li>
                     
                     <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Network & Students</li>
-                    <li>
-                        <a href="admin_franchise.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-briefcase w-6"></i>
-                            <span>Franchise</span>
-                        </a>
-                    </li>
-                    <li>
-                        <!-- Active Link -->
-                        <a href="admin_study_centers.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-building w-6"></i>
-                            <span>Study Centers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors">
-                            <i class="fa fa-user-graduate w-6"></i>
-                            <span>Student Zone</span>
-                        </a>
-                    </li>
+                    <li><a href="admin_franchise.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-briefcase w-6"></i><span>Franchise</span></a></li>
+                    <!-- Active Link -->
+                    <li><a href="admin_study_centers.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-building w-6"></i><span>Study Centers</span></a></li>
+                    <li><a href="admin_student_zone.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-user-graduate w-6"></i><span>Student Zone</span></a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            
-            <!-- Top Navbar -->
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
-                <div class="flex items-center">
-                    <button class="text-gray-500 focus:outline-none md:hidden">
-                        <i class="fa fa-bars fa-lg"></i>
-                    </button>
-                    <h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Study Centers</h2>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100">
-                        <span class="text-gray-700 font-medium text-sm">Super Admin</span>
-                    </div>
-                </div>
+                <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Study Centers</h2></div>
+                <div class="flex items-center space-x-4"><div class="flex items-center space-x-2"><img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100"><span class="text-gray-700 font-medium text-sm">Super Admin</span></div></div>
             </header>
-
-            <!-- Content Body -->
+            
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-indigo-500">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm text-gray-500">Total Centers</p>
-                                <h3 class="text-2xl font-bold text-gray-800">48</h3>
-                            </div>
-                            <div class="p-3 bg-indigo-100 rounded-full text-indigo-600">
-                                <i class="fa fa-network-wired text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm text-gray-500">Active Centers</p>
-                                <h3 class="text-2xl font-bold text-gray-800">45</h3>
-                            </div>
-                            <div class="p-3 bg-green-100 rounded-full text-green-600">
-                                <i class="fa fa-check-circle text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm text-gray-500">Inactive / Blocked</p>
-                                <h3 class="text-2xl font-bold text-gray-800">3</h3>
-                            </div>
-                            <div class="p-3 bg-red-100 rounded-full text-red-600">
-                                <i class="fa fa-ban text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Action Bar -->
                 <div class="flex justify-between items-center mb-6">
                     <div class="relative">
-                        <input type="text" placeholder="Search by name, code, city..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-72">
+                        <input type="text" id="searchInput" placeholder="Search by name, code..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-72">
                         <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>
                     <button onclick="openModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-md transition flex items-center">
@@ -190,72 +77,10 @@
                                 <th class="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
-                            <!-- Row 1 -->
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-gray-900">BESD Learning Point</span>
-                                        <span class="text-xs font-mono text-indigo-600">BESD-BR-001</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 font-medium">Mr. Rahul Kumar</td>
-                                <td class="px-6 py-4">Patna, Bihar</td>
-                                <td class="px-6 py-4">+91 98765 43210</td>
-                                <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span></td>
-                                <td class="px-6 py-4 text-right space-x-2">
-                                    <button onclick="openModal('BESD Learning Point')" class="text-indigo-600 hover:text-indigo-900" title="Edit"><i class="fa fa-edit"></i></button>
-                                    <button class="text-red-600 hover:text-red-900" title="Block/Delete"><i class="fa fa-ban"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Row 2 -->
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-gray-900">Skill India Center</span>
-                                        <span class="text-xs font-mono text-indigo-600">BESD-JH-015</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 font-medium">Mrs. Sneha Singh</td>
-                                <td class="px-6 py-4">Ranchi, Jharkhand</td>
-                                <td class="px-6 py-4">+91 98765 12345</td>
-                                <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span></td>
-                                <td class="px-6 py-4 text-right space-x-2">
-                                    <button onclick="openModal('Skill India Center')" class="text-indigo-600 hover:text-indigo-900" title="Edit"><i class="fa fa-edit"></i></button>
-                                    <button class="text-red-600 hover:text-red-900" title="Block/Delete"><i class="fa fa-ban"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Row 3 -->
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-gray-900">Tech Edu Hub</span>
-                                        <span class="text-xs font-mono text-indigo-600">BESD-UP-022</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 font-medium">Mr. Amit Verma</td>
-                                <td class="px-6 py-4">Lucknow, UP</td>
-                                <td class="px-6 py-4">+91 88776 65544</td>
-                                <td class="px-6 py-4"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-semibold">Inactive</span></td>
-                                <td class="px-6 py-4 text-right space-x-2">
-                                    <button onclick="openModal('Tech Edu Hub')" class="text-indigo-600 hover:text-indigo-900" title="Edit"><i class="fa fa-edit"></i></button>
-                                    <button class="text-green-600 hover:text-green-900" title="Activate"><i class="fa fa-check-circle"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="centerTableBody" class="divide-y divide-gray-200">
+                            <tr><td colspan="6" class="text-center py-4">Loading centers...</td></tr>
                         </tbody>
                     </table>
-                </div>
-                
-                <!-- Pagination -->
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-sm text-gray-600">Showing 1 to 3 of 48 entries</p>
-                    <div class="flex space-x-1">
-                        <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 text-sm">Prev</button>
-                        <button class="px-3 py-1 bg-indigo-600 text-white rounded text-sm">1</button>
-                        <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 text-sm">2</button>
-                        <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 text-sm">3</button>
-                        <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 text-sm">Next</button>
-                    </div>
                 </div>
 
             </main>
@@ -265,25 +90,24 @@
     <!-- ================= ADD/EDIT MODAL ================= -->
     <div id="centerModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 transform transition-all h-auto max-h-[90vh] overflow-y-auto">
-            <!-- Modal Header -->
             <div class="bg-gray-900 px-6 py-4 rounded-t-xl flex justify-between items-center sticky top-0 z-10">
-                <h3 class="text-white font-bold text-lg" id="modalTitle">Register New Center</h3>
+                <h3 class="text-white font-bold text-lg" id="modalTitle">Register Center</h3>
                 <button onclick="closeModal()" class="text-white hover:text-gray-300"><i class="fa fa-times"></i></button>
             </div>
             
-            <!-- Modal Body -->
-            <form class="p-6" onsubmit="event.preventDefault(); alert('Center Data Saved Successfully!'); closeModal();">
+            <form id="centerForm" class="p-6">
+                <input type="hidden" id="centerId"> <!-- Hidden ID -->
+                
                 <div class="grid gap-6">
-                    
                     <!-- Basic Info -->
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Center Name</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: BESD Learning Point" required>
+                            <input type="text" id="centerName" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Center Code</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: BESD-BR-001">
+                            <input type="text" id="centerCode" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Ex: BESD-BR-001">
                         </div>
                     </div>
 
@@ -291,23 +115,23 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Director Name</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Full Name" required>
+                            <input type="text" id="directorName" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Director Mobile</label>
-                            <input type="tel" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="10 Digit Mobile">
+                            <input type="tel" id="directorPhone" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
                         </div>
                     </div>
 
-                    <!-- Contact Info -->
+                    <!-- Contact & Status -->
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                            <input type="email" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="center@email.com">
+                            <input type="email" id="centerEmail" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">Status</label>
-                            <select class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <select id="centerStatus" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option>
                                 <option value="Blocked">Blocked</option>
@@ -319,55 +143,199 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
-                            <select class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <select id="centerState" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                                 <option>Bihar</option>
                                 <option>Jharkhand</option>
                                 <option>Uttar Pradesh</option>
                                 <option>West Bengal</option>
+                                <option>Delhi</option>
+                                <option>Other</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2">City / District</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="City Name">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">District / City</label>
+                            <input type="text" id="centerDistrict" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2">Full Address</label>
-                        <textarea class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="2" placeholder="Enter complete address"></textarea>
+                        <textarea id="centerAddress" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="2" required></textarea>
                     </div>
-
                 </div>
                 
-                <!-- Modal Footer -->
                 <div class="mt-6 flex justify-end space-x-3 pt-4 border-t border-gray-100">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md">Save Center</button>
+                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md flex items-center">
+                        <span>Save Center</span>
+                        <div id="btnLoader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        function openModal(name = null) {
-            const modal = document.getElementById('centerModal');
-            const title = document.getElementById('modalTitle');
-            
-            modal.classList.remove('hidden');
-            
-            if (name) {
-                title.innerText = 'Edit Center: ' + name;
-                // Here you would typically populate the form fields
-            } else {
-                title.innerText = 'Register New Center';
-                // Clear fields
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const colRef = collection(db, "study_centers");
+
+        let allCenters = [];
+
+        // --- LOAD DATA ---
+        async function loadCenters() {
+            const tbody = document.getElementById('centerTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Loading...</td></tr>';
+
+            try {
+                const q = query(colRef, orderBy("code")); // Ordered by center code
+                const snapshot = await getDocs(q);
+                
+                tbody.innerHTML = "";
+                allCenters = [];
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No study centers registered.</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const item = { id: doc.id, ...data };
+                    allCenters.push(item);
+                    renderRow(item);
+                });
+
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Error loading data.</td></tr>';
             }
         }
 
-        function closeModal() {
-            document.getElementById('centerModal').classList.add('hidden');
-        }
-    </script>
+        function renderRow(data) {
+            const tbody = document.getElementById('centerTableBody');
+            
+            let statusBadge = 'bg-green-100 text-green-800';
+            if(data.status === 'Inactive') statusBadge = 'bg-yellow-100 text-yellow-800';
+            if(data.status === 'Blocked') statusBadge = 'bg-red-100 text-red-800';
 
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-gray-50 border-b border-gray-100";
+            tr.innerHTML = `
+                <td class="px-6 py-4">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-gray-900">${data.name}</span>
+                        <span class="text-xs font-mono text-indigo-600">${data.code}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 font-medium">${data.director}</td>
+                <td class="px-6 py-4">${data.district}, ${data.state}</td>
+                <td class="px-6 py-4">${data.mobile}</td>
+                <td class="px-6 py-4"><span class="${statusBadge} px-2 py-1 rounded-full text-xs font-semibold">${data.status}</span></td>
+                <td class="px-6 py-4 text-right space-x-2">
+                    <button class="edit-btn text-indigo-600 hover:text-indigo-900" data-id="${data.id}"><i class="fa fa-edit"></i></button>
+                    <button class="delete-btn text-red-600 hover:text-red-900" data-id="${data.id}"><i class="fa fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        // --- SAVE DATA ---
+        document.getElementById('centerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveBtn');
+            const loader = document.getElementById('btnLoader');
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+
+            const id = document.getElementById('centerId').value;
+            const data = {
+                name: document.getElementById('centerName').value,
+                code: document.getElementById('centerCode').value,
+                director: document.getElementById('directorName').value,
+                mobile: document.getElementById('directorPhone').value,
+                email: document.getElementById('centerEmail').value,
+                status: document.getElementById('centerStatus').value,
+                state: document.getElementById('centerState').value,
+                district: document.getElementById('centerDistrict').value,
+                address: document.getElementById('centerAddress').value,
+            };
+
+            try {
+                if(id) {
+                    await updateDoc(doc(db, "study_centers", id), data);
+                    alert("Center Updated!");
+                } else {
+                    await addDoc(colRef, data);
+                    alert("Center Registered!");
+                }
+                closeModal();
+                loadCenters();
+            } catch (e) {
+                console.error(e);
+                alert("Error saving data.");
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // --- EDIT/DELETE HANDLERS ---
+        document.getElementById('centerTableBody').addEventListener('click', async (e) => {
+            if(e.target.closest('.delete-btn')) {
+                if(!confirm("Delete this study center permanently?")) return;
+                const id = e.target.closest('.delete-btn').getAttribute('data-id');
+                await deleteDoc(doc(db, "study_centers", id));
+                loadCenters();
+            }
+            if(e.target.closest('.edit-btn')) {
+                const id = e.target.closest('.edit-btn').getAttribute('data-id');
+                const center = allCenters.find(c => c.id === id);
+                if(center) openModal(center);
+            }
+        });
+
+        // --- MODAL ---
+        window.openModal = (data = null) => {
+            const form = document.getElementById('centerForm');
+            form.reset();
+            document.getElementById('centerId').value = "";
+            document.getElementById('modalTitle').innerText = "Register New Center";
+
+            if(data) {
+                document.getElementById('modalTitle').innerText = "Edit Center";
+                document.getElementById('centerId').value = data.id;
+                document.getElementById('centerName').value = data.name;
+                document.getElementById('centerCode').value = data.code;
+                document.getElementById('directorName').value = data.director;
+                document.getElementById('directorPhone').value = data.mobile;
+                document.getElementById('centerEmail').value = data.email || "";
+                document.getElementById('centerStatus').value = data.status;
+                document.getElementById('centerState').value = data.state;
+                document.getElementById('centerDistrict').value = data.district;
+                document.getElementById('centerAddress').value = data.address;
+            }
+            document.getElementById('centerModal').classList.remove('hidden');
+        };
+
+        window.closeModal = () => document.getElementById('centerModal').classList.add('hidden');
+
+        // Init
+        loadCenters();
+    </script>
 </body>
 </html>
