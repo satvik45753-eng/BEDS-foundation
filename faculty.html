@@ -3,30 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franchise Opportunity - BESD Foundation</title>
+    <title>Our Faculty - BESD Foundation</title>
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Inter', sans-serif; }
+        
+        /* Consistent Gradient Background */
         .page-header-bg {
             background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
+        
         .page-header-bg::before {
-            content: ''; position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
             background: radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 60%);
-            opacity: 0.8; z-index: 0;
+            opacity: 0.8;
+            z-index: 0;
         }
+        
         .header-content { position: relative; z-index: 1; }
-        .step-circle { width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 1.25rem; transition: all 0.3s; }
-        .process-card:hover .step-circle { transform: scale(1.1); }
-        /* Loader */
-        .loader { border-top-color: #ffffff; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Faculty Card Styling */
+        .faculty-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Social overlay effect on hover */
+        .faculty-social {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .faculty-card:hover .faculty-social {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -35,34 +64,57 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html" class="text-xl font-bold text-indigo-700">BESD <span class="text-gray-700">FOUNDATION</span></a>
+                    <a href="index.html" class="text-xl font-bold text-indigo-700">
+                        BESD <span class="text-gray-700">FOUNDATION</span>
+                    </a>
                 </div>
+                
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
                     <a href="index.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Home</a>
                     <a href="about.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">About Us</a>
                     <a href="courses.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Courses</a>
-                    <a href="faculty.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Faculty</a>
-                    <a href="franchise.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-600 px-2 py-1">Franchise</a>
+                    <a href="faculty.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-600 px-2 py-1">Faculty</a>
+                    <a href="franchise.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Franchise</a>
                     <a href="study_center.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Study Center</a>
                     <a href="gallery.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Gallery</a>
                     <a href="download.html" class="text-gray-600 hover:text-indigo-600 px-2 py-1">Download</a>
                 </div>
+                
+                <!-- Student Zone Button -->
                 <div class="hidden md:block">
                     <a href="student_zone.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
                         <i class="fa fa-user-graduate mr-2"></i> Student Zone
                     </a>
                 </div>
+                
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"><i class="fa fa-bars fa-lg" id="menu-icon"></i></button>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        <i class="fa fa-bars fa-lg" id="menu-icon"></i>
+                    </button>
                 </div>
             </div>
         </nav>
+
+        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="franchise.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
-                <a href="student_zone.html" class="block w-full text-center px-4 py-2 mt-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">Student Zone</a>
+                <a href="about.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+                <a href="courses.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
+                <a href="faculty.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
+                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
+                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
+                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
+            </div>
+             <div class="px-4 pb-4">
+                 <a href="student_zone.html" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
+                    <i class="fa fa-user-graduate mr-2"></i> Student Zone
+                </a>
             </div>
         </div>
     </header>
@@ -70,8 +122,10 @@
     <!-- ======== PAGE HEADER ======== -->
     <div class="page-header-bg py-16 lg:py-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 header-content text-center">
-            <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Become Our Partner</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-indigo-100">Join the BESD Foundation family. Start your own authorized study center.</p>
+            <h1 class="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">Our Expert Faculty</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-indigo-100">
+                Meet the dedicated professionals committed to shaping your future through quality education.
+            </p>
         </div>
     </div>
 
@@ -79,57 +133,31 @@
     <main class="py-16 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="grid lg:grid-cols-2 gap-16 mb-20">
-                <!-- Requirements Section (Static) -->
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Franchise Requirements</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-start"><i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i><span class="text-gray-700"><strong>Space:</strong> Min 200-500 Sq. ft. area.</span></li>
-                        <li class="flex items-start"><i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i><span class="text-gray-700"><strong>Computers:</strong> Min 5-10 systems with internet.</span></li>
-                        <li class="flex items-start"><i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i><span class="text-gray-700"><strong>Faculty:</strong> Qualified teaching staff (min 2).</span></li>
-                    </ul>
-
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6 mt-10 border-l-4 border-yellow-500 pl-4">Steps to Apply</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-center process-card"><div class="step-circle bg-indigo-600 text-white mr-4 shadow-lg">1</div><p class="text-gray-700 font-medium">Fill the Franchise Inquiry Form.</p></div>
-                        <div class="flex items-center process-card"><div class="step-circle bg-indigo-600 text-white mr-4 shadow-lg">2</div><p class="text-gray-700 font-medium">Verification & Inspection.</p></div>
-                        <div class="flex items-center process-card"><div class="step-circle bg-green-600 text-white mr-4 shadow-lg">3</div><p class="text-gray-700 font-medium">Start Your Center!</p></div>
+            <!-- Director's Message (Static Section) -->
+            <div class="mb-16 bg-indigo-50 rounded-2xl p-8 lg:p-10 flex flex-col lg:flex-row items-center gap-8">
+                <div class="lg:w-1/3 text-center">
+                    <!-- Placeholder for Director Image, can be dynamic later if needed -->
+                    <div class="w-48 h-48 mx-auto rounded-full bg-indigo-200 border-4 border-white shadow-lg flex items-center justify-center text-indigo-500 overflow-hidden">
+                         <i class="fa fa-user-tie text-6xl"></i>
                     </div>
                 </div>
+                <div class="lg:w-2/3 text-center lg:text-left">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Dr. Rajesh Kumar</h2>
+                    <p class="text-indigo-600 font-semibold mb-4">Director, BESD Foundation</p>
+                    <p class="text-gray-700 italic">
+                        "Our faculty is our strength. We select educators not just for their academic qualifications, but for their passion for teaching and ability to inspire students. At BESD, we believe in mentorship that goes beyond the classroom."
+                    </p>
+                </div>
+            </div>
 
-                <!-- Inquiry Form (Dynamic) -->
-                <div class="bg-white p-8 rounded-xl shadow-xl border border-gray-100">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Apply Now</h3>
-                    <form id="franchiseForm">
-                        <div class="grid md:grid-cols-2 gap-6 mb-4">
-                            <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
-                                <input id="name" class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" type="text" placeholder="Enter name" required>
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Mobile Number</label>
-                                <input id="mobile" class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" type="tel" placeholder="10 digit mobile" required>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                            <input id="email" class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" type="email" placeholder="Enter email">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Proposed Center Address</label>
-                            <textarea id="address" class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3" placeholder="City, District, State" required></textarea>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Message</label>
-                            <textarea id="message" class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="2" placeholder="Any specific query?"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" id="submitBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-md focus:outline-none focus:shadow-outline w-full transition duration-300 flex justify-center items-center">
-                                <span>Submit Request</span>
-                                <div id="loader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div>
-                            </button>
-                        </div>
-                    </form>
+            <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center border-b-2 border-indigo-200 pb-4 inline-block w-full">Meet Our Teachers</h2>
+
+            <!-- Faculty Grid (Dynamic) -->
+            <div id="faculty-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <i class="fa fa-spinner fa-spin text-3xl text-indigo-600 mb-3"></i>
+                    <p class="text-gray-500">Loading faculty members...</p>
                 </div>
             </div>
         </div>
@@ -138,7 +166,55 @@
     <!-- ======== FOOTER ======== -->
     <footer class="bg-gray-900 text-gray-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">BESD Foundation</h3>
+                    <p class="text-sm">Bambdeo Education and Social Development Foundation. Dedicated to education and social development.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="courses.html" class="hover:text-white">Courses</a></li>
+                        <li><a href="faculty.html" class="hover:text-white text-indigo-400">Faculty</a></li>
+                        <li><a href="franchise.html" class="hover:text-white">Franchise</a></li>
+                        <li><a href="study_center.html" class="hover:text-white">Study Centers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa fa-home mr-3 mt-1 flex-shrink-0"></i>
+                            <span>[Your Address Here],<br>City, State - PIN</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-3"></i>
+                            <a href="tel:+911234567890" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                         <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-3"></i>
+                            <a href="https://wa.me/911234567890" target="_blank" class="hover:text-white">+91 12345 67890</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-3"></i>
+                            <a href="mailto:info@besdfoundation.com" class="hover:text-white">info@besdfoundation.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                     <h3 class="text-lg font-semibold text-white mb-4">Home</h3>
+                     <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Go to Homepage</a></li>
+                     </ul>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-gray-800 pt-6 text-center text-sm">
                 <p>&copy; 2025 BESD Foundation. All Rights Reserved.</p>
             </div>
         </div>
@@ -147,59 +223,96 @@
     <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // --- YOUR FIREBASE CONFIG ---
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- FORM SUBMISSION ---
-        document.getElementById('franchiseForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // --- FETCH FACULTY ---
+        async function loadFaculty() {
+            const container = document.getElementById('faculty-grid');
             
-            const btn = document.getElementById('submitBtn');
-            const loader = document.getElementById('loader');
-            
-            btn.disabled = true;
-            loader.classList.remove('hidden');
-
             try {
-                await addDoc(collection(db, "franchise_inquiries"), {
-                    name: document.getElementById('name').value,
-                    mobile: document.getElementById('mobile').value,
-                    email: document.getElementById('email').value,
-                    address: document.getElementById('address').value,
-                    message: document.getElementById('message').value,
-                    status: 'Pending',
-                    timestamp: new Date()
+                // Fetch from Firestore, ordered by name
+                const q = query(collection(db, "faculty"), orderBy("name"));
+                const querySnapshot = await getDocs(q);
+                
+                // Clear Loader
+                container.innerHTML = "";
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10">No faculty members listed yet.</div>';
+                    return;
+                }
+
+                // Render Cards
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    // Social Links Logic
+                    let socialHTML = '';
+                    if(data.linkedin) socialHTML += `<a href="${data.linkedin}" target="_blank" class="text-white hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>`;
+                    if(data.twitter) socialHTML += `<a href="${data.twitter}" target="_blank" class="text-white hover:text-yellow-400"><i class="fab fa-twitter"></i></a>`;
+                    
+                    // Fallback Image
+                    const imgUrl = data.imageUrl || "https://placehold.co/400x400/e2e8f0/475569?text=Faculty";
+
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-xl shadow-sm overflow-hidden faculty-card border border-gray-100";
+                    
+                    card.innerHTML = `
+                        <div class="faculty-image-container relative h-64 overflow-hidden">
+                            <img src="${imgUrl}" alt="${data.name}" class="w-full h-full object-cover object-top">
+                            <div class="faculty-social absolute bottom-0 left-0 right-0 bg-indigo-600 bg-opacity-90 py-3 flex justify-center space-x-4">
+                                ${socialHTML || '<span class="text-white text-xs">Expert Faculty</span>'}
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-900">${data.name}</h3>
+                            <p class="text-indigo-600 text-sm font-medium mb-2">${data.designation}</p>
+                            <p class="text-gray-500 text-xs mb-3 font-semibold">${data.qualification} <span class="mx-1">•</span> ${data.experience}</p>
+                            <p class="text-gray-600 text-sm line-clamp-2" title="${data.skills || ''}">${data.skills || 'Experienced professional.'}</p>
+                        </div>
+                    `;
+                    container.appendChild(card);
                 });
 
-                alert("Application Submitted Successfully! Our team will contact you soon.");
-                document.getElementById('franchiseForm').reset();
-
             } catch (error) {
-                console.error("Error submitting form: ", error);
-                alert("Something went wrong. Please try again.");
-            } finally {
-                btn.disabled = false;
-                loader.classList.add('hidden');
+                console.error("Error fetching faculty:", error);
+                container.innerHTML = '<div class="col-span-full text-center text-red-500 py-10">Failed to load faculty members. Please check connection.</div>';
             }
-        });
+        }
 
-        // Mobile Menu
+        // Mobile Menu Logic
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
         if(menuButton){
-            menuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            menuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.classList.toggle('hidden');
+                if (isMenuOpen) {
+                    menuIcon.className = 'fa fa-bars fa-lg';
+                } else {
+                    menuIcon.className = 'fa fa-times fa-lg';
+                }
+            });
         }
+
+        // Initialize on load
+        loadFaculty();
+
     </script>
 </body>
 </html>
