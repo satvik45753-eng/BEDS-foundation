@@ -101,7 +101,7 @@
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-6" id="main-title">Who We Are</h2>
                     <div class="prose prose-lg text-gray-600" id="main-desc">
-                        <!-- Default Static Content -->
+                        <!-- Default Static Content (Will be replaced by Firebase) -->
                         <p class="mb-4">
                             The <strong>Bambdeo Education and Social Development Foundation (BESD)</strong> is a registered non-profit organization dedicated to bridging the gap between ambition and opportunity. Established with the vision of creating an educated and self-reliant society, we focus on providing high-quality vocational and computer education to students from all walks of life.
                         </p>
@@ -166,7 +166,7 @@
     </main>
 
     <!-- ======== FOOTER ======== -->
-    <footer class="bg-gray-800 text-gray-300 border-t border-gray-700">
+    <footer class="bg-gray-900 text-gray-300 border-t border-gray-700">
         <div class="container mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -212,12 +212,13 @@
 
         // --- CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
         };
 
         const app = initializeApp(firebaseConfig);
