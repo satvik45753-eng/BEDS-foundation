@@ -42,6 +42,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
                 <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Gallery</h2></div>
+                <div class="flex items-center space-x-4"><div class="flex items-center space-x-2"><img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100"><span class="text-gray-700 font-medium text-sm" id="adminEmail">Checking...</span></div></div>
             </header>
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 <div class="flex justify-between items-center mb-8">
@@ -92,11 +93,14 @@
         </div>
     </div>
 
+    <!-- Firebase & Logic Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        // Import Auth is CRITICAL now
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // YOUR KEYS
+        // CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
             authDomain: "besd-foundtion.firebaseapp.com",
@@ -108,11 +112,26 @@
         };
         const IMGBB_API_KEY = "2e29f3711c9d4cdcffbb7fd7d407a1a7";
 
+        // Initialize
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Auth ko initialize kiya
         const db = getFirestore(app);
         const galleryCollection = collection(db, "gallery");
 
-        // Upload Logic
+        // --- AUTH CHECK LOGIC (VERY IMPORTANT) ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is logged in
+                document.getElementById('adminEmail').innerText = user.email;
+                loadGallery(); // Data tab load karo jab login confirm ho
+            } else {
+                // User is NOT logged in
+                alert("Security Alert: You are not logged in! Redirecting to login...");
+                window.location.href = "dashboard.html";
+            }
+        });
+
+        // --- UPLOAD LOGIC ---
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
         
@@ -131,6 +150,12 @@
 
             if (!file) return alert("Please select an image!");
 
+            // Check Auth again before upload
+            if (!auth.currentUser) {
+                alert("Permission Denied: You must be logged in.");
+                return;
+            }
+
             btn.disabled = true;
             btnText.innerText = "Uploading...";
             btnLoader.classList.remove('hidden');
@@ -142,11 +167,16 @@
                 const imgResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
                 const imgData = await imgResponse.json();
 
-                if (!imgData.success) throw new Error("Image Upload Failed");
+                if (!imgData.success) throw new Error("Image Upload Failed on Server");
                 const imageUrl = imgData.data.url;
 
                 // Save to Firebase
-                await addDoc(galleryCollection, { title: title, category: category, imageUrl: imageUrl, timestamp: new Date() });
+                await addDoc(galleryCollection, {
+                    title: title,
+                    category: category,
+                    imageUrl: imageUrl,
+                    timestamp: new Date()
+                });
 
                 alert("Image Added Successfully!");
                 closeModal();
@@ -162,7 +192,7 @@
             }
         });
 
-        // Load Gallery
+        // --- FETCH LOGIC ---
         async function loadGallery() {
             const grid = document.getElementById('galleryGrid');
             const totalLabel = document.getElementById('totalImages');
@@ -198,6 +228,7 @@
                 document.querySelectorAll('.delete-btn').forEach(btn => {
                     btn.addEventListener('click', async function() {
                         if(confirm("Delete this image?")) {
+                            if (!auth.currentUser) return alert("Permission Denied!");
                             await deleteDoc(doc(db, "gallery", this.getAttribute('data-id')));
                             loadGallery();
                         }
@@ -206,7 +237,12 @@
 
             } catch (error) {
                 console.error(error);
-                grid.innerHTML = `<p class="text-red-500 col-span-full text-center">Error loading data.</p>`;
+                // Catch "Missing or insufficient permissions" error here
+                if(error.code === 'permission-denied') {
+                    grid.innerHTML = `<p class="text-red-500 col-span-full text-center">Access Denied: You are not authorized.</p>`;
+                } else {
+                    grid.innerHTML = `<p class="text-red-500 col-span-full text-center">Error loading data.</p>`;
+                }
             }
         }
 
@@ -215,8 +251,6 @@
             document.getElementById('uploadForm').reset();
             document.getElementById('fileNameDisplay').innerText = "Click to select image";
         }
-
-        loadGallery();
     </script>
 </body>
 </html>
