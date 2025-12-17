@@ -54,6 +54,17 @@
         .process-card:hover .step-circle {
             transform: scale(1.1);
         }
+
+        /* Loader Animation */
+        .loader {
+            border-top-color: #ffffff;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -211,10 +222,10 @@
                     </div>
                 </div>
 
-                <!-- Inquiry Form -->
+                <!-- Inquiry Form (Dynamic) -->
                 <div class="bg-white p-8 rounded-xl shadow-xl border border-gray-100">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Apply Now</h3>
-                    <form onsubmit="event.preventDefault(); alert('Thank you! Your request has been submitted. We will contact you soon.');">
+                    <form id="franchiseForm">
                         <div class="grid md:grid-cols-2 gap-6 mb-4">
                             <div>
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Full Name</label>
@@ -238,8 +249,9 @@
                             <textarea class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" rows="2" placeholder="Any specific questions?"></textarea>
                         </div>
                         <div class="text-center">
-                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-md focus:outline-none focus:shadow-outline w-full transition duration-300" type="submit">
-                                Submit Request
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-md focus:outline-none focus:shadow-outline w-full transition duration-300 flex items-center justify-center" type="submit" id="submitBtn">
+                                <span>Submit Request</span>
+                                <div id="loader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div>
                             </button>
                         </div>
                     </form>
@@ -248,7 +260,7 @@
         </div>
     </main>
 
-    <!-- ======== FOOTER (Same as Index) ======== -->
+    <!-- ======== FOOTER ======== -->
     <footer class="bg-gray-900 text-gray-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -313,8 +325,62 @@
         </div>
     </footer>
 
-    <!-- Script for Mobile Menu -->
-    <script>
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- FORM SUBMISSION ---
+        document.getElementById('franchiseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+
+            const inquiryData = {
+                name: document.getElementById('name').value,
+                mobile: document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                message: document.getElementById('message').value,
+                status: 'Pending', // Default status
+                timestamp: new Date()
+            };
+
+            try {
+                // Add to 'franchise_inquiries' collection
+                await addDoc(collection(db, "franchise_inquiries"), inquiryData);
+
+                alert("Thank you! Your application has been submitted successfully. We will contact you soon.");
+                document.getElementById('franchiseForm').reset();
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Something went wrong. Please check your internet connection and try again.");
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // Mobile Menu Logic
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
