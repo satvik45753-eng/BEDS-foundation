@@ -88,7 +88,12 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html" class="text-indigo-700 bg-indigo-50 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="about.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
-                <!-- Other links... -->
+                <a href="courses.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Courses</a>
+                <a href="faculty.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Faculty</a>
+                <a href="franchise.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Franchise</a>
+                <a href="study_center.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Center</a>
+                <a href="gallery.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="download.html" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Download</a>
                 <a href="student_zone.html" class="block w-full text-center px-4 py-2 mt-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">Student Zone</a>
             </div>
         </div>
@@ -108,10 +113,10 @@
                             Building a better future through education and social development. Our goal is to provide quality education to every student.
                         </p>
                         <div class="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
-                            <a href="courses.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-900 bg-yellow-400 hover:bg-yellow-500 shadow-lg">
+                            <a href="courses.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-900 bg-yellow-400 hover:bg-yellow-500 shadow-lg transition transform hover:-translate-y-1">
                                 View Our Courses
                             </a>
-                            <a href="about.html" class="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 text-base font-medium rounded-md text-indigo-100 hover:bg-indigo-700 hover:border-indigo-700 shadow-sm">
+                            <a href="about.html" class="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 text-base font-medium rounded-md text-indigo-100 hover:bg-indigo-700 hover:border-indigo-700 shadow-sm transition">
                                 Learn About Us
                             </a>
                         </div>
@@ -140,7 +145,7 @@
                 </div>
                 
                 <div class="mt-10 text-center">
-                    <a href="courses.html" class="text-indigo-600 font-semibold hover:text-indigo-800">View All Courses &rarr;</a>
+                    <a href="courses.html" class="text-indigo-600 font-semibold hover:text-indigo-800 transition">View All Courses &rarr;</a>
                 </div>
             </div>
         </section>
@@ -152,17 +157,17 @@
                     <h2 class="text-3xl font-extrabold text-gray-900">Why Trust Us?</h2>
                 </div>
                 <div class="mt-12 grid gap-8 md:grid-cols-3">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center border border-gray-100">
                         <div class="h-12 w-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto text-indigo-600 mb-4"><i class="fa fa-certificate text-xl"></i></div>
                         <h3 class="text-lg font-bold text-gray-900">ISO Certified</h3>
                         <p class="mt-2 text-gray-600 text-sm">We are a registered and ISO 9001:2015 certified organization.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center border border-gray-100">
                         <div class="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 mb-4"><i class="fa fa-chalkboard-teacher text-xl"></i></div>
                         <h3 class="text-lg font-bold text-gray-900">Expert Faculty</h3>
                         <p class="mt-2 text-gray-600 text-sm">Learn from experienced professionals dedicated to your success.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center border border-gray-100">
                         <div class="h-12 w-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto text-yellow-600 mb-4"><i class="fa fa-hand-holding-heart text-xl"></i></div>
                         <h3 class="text-lg font-bold text-gray-900">Social Welfare</h3>
                         <p class="mt-2 text-gray-600 text-sm">We are committed to the upliftment of the underprivileged.</p>
@@ -184,6 +189,7 @@
                 
                 <div id="home-gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Dynamic Images will load here -->
+                    <div class="col-span-full text-center py-8 text-gray-400">Loading gallery...</div>
                 </div>
             </div>
         </section>
@@ -243,20 +249,21 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // --- CONFIGURATION (Same as Admin) ---
+        // --- CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- 1. TYPED.JS ANIMATION (Static Fallback logic) ---
+        // --- 1. TYPED.JS ANIMATION ---
         document.addEventListener('DOMContentLoaded', () => {
             new Typed('#typed-text', {
                 strings: ['Bambdeo Education and Social Development Foundation', 'Empowering Youth', 'Building Future'],
@@ -271,7 +278,16 @@
             const btn = document.getElementById('mobile-menu-button');
             const menu = document.getElementById('mobile-menu');
             if(btn){
-                btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+                btn.addEventListener('click', () => {
+                    const isHidden = menu.classList.contains('hidden');
+                    if(isHidden) {
+                        menu.classList.remove('hidden');
+                        document.getElementById('menu-icon').className = 'fa fa-times fa-lg';
+                    } else {
+                        menu.classList.add('hidden');
+                        document.getElementById('menu-icon').className = 'fa fa-bars fa-lg';
+                    }
+                });
             }
         });
 
@@ -279,13 +295,8 @@
         async function loadFeaturedCourses() {
             const grid = document.getElementById('featured-courses-grid');
             try {
-                // Assuming 'courses' collection exists (from Admin Panel)
-                const q = query(collection(db, "courses"), orderBy("createdAt", "desc"), limit(3)); 
-                // Note: Ensure you add a 'createdAt' field when saving courses in admin, or remove orderBy for now.
-                // For simplicity, let's just fetch:
-                const simpleQ = query(collection(db, "courses"), limit(3));
-                
-                const querySnapshot = await getDocs(simpleQ);
+                const q = query(collection(db, "courses"), limit(3)); // Fetch any 3 for now
+                const querySnapshot = await getDocs(q);
                 
                 grid.innerHTML = ""; // Clear loader
 
@@ -304,8 +315,8 @@
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
                             <div class="h-12 w-12 bg-pink-100 rounded-md flex items-center justify-center text-pink-600 mb-4"><i class="fa fa-cut text-2xl"></i></div>
-                            <h3 class="text-xl font-bold text-gray-900">Tailoring</h3>
-                            <p class="text-gray-600 mt-2 text-sm">Vocational training in Fashion Design.</p>
+                            <h3 class="text-xl font-bold text-gray-900">Vocational</h3>
+                            <p class="text-gray-600 mt-2 text-sm">Skill based training programs.</p>
                         </div>
                     `;
                     return;
@@ -313,11 +324,10 @@
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    // Determine Icon based on category (simple logic)
                     let icon = 'fa-book';
                     let color = 'indigo';
-                    if(data.category?.toLowerCase().includes('computer')) { icon = 'fa-laptop'; color = 'blue'; }
-                    else if(data.category?.toLowerCase().includes('vocational')) { icon = 'fa-cut'; color = 'pink'; }
+                    if(data.category?.includes('Computer')) { icon = 'fa-laptop'; color = 'blue'; }
+                    else if(data.category?.includes('Vocational')) { icon = 'fa-cut'; color = 'pink'; }
 
                     const card = document.createElement('div');
                     card.className = "bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300";
@@ -325,10 +335,10 @@
                         <div class="h-12 w-12 bg-${color}-100 rounded-md flex items-center justify-center text-${color}-600 mb-4">
                             <i class="fa ${icon} text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900">${data.courseName || data.title || 'Course'}</h3>
+                        <h3 class="text-xl font-bold text-gray-900">${data.courseName || data.title}</h3>
                         <div class="flex items-center text-xs text-gray-500 mt-2 mb-3">
-                            <span class="bg-gray-100 px-2 py-1 rounded mr-2">${data.duration || 'N/A'}</span>
-                            <span class="bg-${color}-50 text-${color}-700 px-2 py-1 rounded">${data.category || 'General'}</span>
+                            <span class="bg-gray-100 px-2 py-1 rounded mr-2">${data.duration}</span>
+                            <span class="bg-${color}-50 text-${color}-700 px-2 py-1 rounded truncate">${data.category}</span>
                         </div>
                         <p class="text-gray-600 text-sm line-clamp-2">${data.description || 'Join this course to enhance your skills.'}</p>
                     `;
@@ -359,18 +369,19 @@
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const div = document.createElement('div');
-                    div.className = "relative h-40 rounded-lg overflow-hidden group shadow-sm";
+                    div.className = "relative h-40 rounded-lg overflow-hidden group shadow-sm bg-gray-100";
                     div.innerHTML = `
                         <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <span class="text-white text-xs font-bold px-2 text-center">${data.title}</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="text-white text-xs font-bold px-2 text-center select-none">${data.title}</span>
                         </div>
                     `;
                     grid.appendChild(div);
                 });
 
             } catch (e) {
-                console.log("Gallery fetch error (likely empty DB or rules):", e);
+                console.log("Gallery fetch error:", e);
+                grid.innerHTML = '<p class="text-center col-span-full text-gray-400 text-sm">Loading gallery...</p>';
             }
         }
 
