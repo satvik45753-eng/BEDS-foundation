@@ -17,7 +17,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        /* Consistent Gradient Background (Original Design) */
+        /* Consistent Gradient Background */
         .page-header-bg {
             background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #FBBF24 100%);
             position: relative;
@@ -85,7 +85,7 @@
 </head>
 <body class="bg-gray-50">
 
-    <!-- ======== HEADER / NAVIGATION BAR ======== -->
+    <!-- ======== HEADER ======== -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -164,6 +164,7 @@
                 <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-indigo-50 transition" data-filter="events">Events</button>
                 <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-indigo-50 transition" data-filter="classroom">Classroom</button>
                 <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-indigo-50 transition" data-filter="awards">Awards</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-indigo-50 transition" data-filter="camps">Camps</button>
             </div>
 
             <!-- Gallery Grid (Dynamic Content Loads Here) -->
@@ -184,7 +185,7 @@
         </div>
     </div>
 
-    <!-- ======== FOOTER (Consistent) ======== -->
+    <!-- ======== FOOTER ======== -->
     <footer class="bg-gray-900 text-gray-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -241,20 +242,21 @@
         </div>
     </footer>
 
-    <!-- Script for Functionality -->
+    <!-- Firebase Script -->
     <script type="module">
         // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // --- REPLACE WITH YOUR CONFIG ---
+        // --- YOUR FIREBASE CONFIG ---
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+            apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
+            authDomain: "besd-foundtion.firebaseapp.com",
+            projectId: "besd-foundtion",
+            storageBucket: "besd-foundtion.firebasestorage.app",
+            messagingSenderId: "721388044748",
+            appId: "1:721388044748:web:05fefc558ea867823b9d69",
+            measurementId: "G-T4VYXQG1NW"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -283,12 +285,14 @@
                     
                     const itemDiv = document.createElement('div');
                     itemDiv.className = "gallery-item rounded-xl shadow-sm relative group";
-                    itemDiv.setAttribute('data-category', data.category); // Important for filtering
+                    // Using lowercase category for data attribute to ensure matching
+                    itemDiv.setAttribute('data-category', (data.category || 'other').toLowerCase()); 
                     
                     itemDiv.innerHTML = `
-                        <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-64 object-cover">
-                        <div class="gallery-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold">
-                            <span>${data.title}</span>
+                        <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="gallery-overlay absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <i class="fa fa-search-plus text-3xl mb-2"></i>
+                            <span class="font-bold px-2 text-center">${data.title}</span>
                         </div>
                     `;
                     
@@ -312,7 +316,7 @@
             }
         }
 
-        // --- FILTER LOGIC (Matches original design) ---
+        // --- FILTER LOGIC ---
         function initFilters() {
             const filterBtns = document.querySelectorAll('.filter-btn');
             const galleryItems = document.querySelectorAll('.gallery-item');
@@ -326,7 +330,8 @@
                     const filterValue = btn.getAttribute('data-filter');
 
                     galleryItems.forEach(item => {
-                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (filterValue === 'all' || itemCategory === filterValue) {
                             item.classList.remove('hidden');
                             item.classList.add('block');
                         } else {
@@ -356,16 +361,9 @@
         // --- MOBILE MENU ---
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-
         if(menuButton){
             menuButton.addEventListener('click', () => {
-                const isMenuOpen = mobileMenu.classList.toggle('hidden');
-                if (isMenuOpen) {
-                    menuIcon.className = 'fa fa-bars fa-lg';
-                } else {
-                    menuIcon.className = 'fa fa-times fa-lg';
-                }
+                mobileMenu.classList.toggle('hidden');
             });
         }
 
