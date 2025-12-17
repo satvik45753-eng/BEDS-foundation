@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Student Zone - BESD Admin</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Inter', sans-serif; }
         .sidebar-link.active { background-color: #4F46E5; color: white; }
         .sidebar-link:hover:not(.active) { background-color: #1F2937; color: #fff; }
         #resultModal { backdrop-filter: blur(5px); }
-        .loader { border-top-color: #ffffff; animation: spinner 1.5s linear infinite; }
+        
+        /* Loader */
+        .loader { border-top-color: #ffffff; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
         @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -22,18 +31,30 @@
         
         <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-gray-400 flex flex-col hidden md:flex">
-            <div class="h-16 flex items-center justify-center border-b border-gray-800"><h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1></div>
+            <div class="h-16 flex items-center justify-center border-b border-gray-800">
+                <h1 class="text-white font-bold text-xl">BESD <span class="text-indigo-500">ADMIN</span></h1>
+            </div>
+            
             <nav class="flex-1 overflow-y-auto py-4">
                 <ul class="space-y-1 px-2">
                     <li><a href="dashboard.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-tachometer-alt w-6"></i><span>Dashboard</span></a></li>
+                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Content Management</li>
                     <li><a href="admin_about.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-info-circle w-6"></i><span>About Us</span></a></li>
                     <li><a href="admin_courses.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-book-open w-6"></i><span>Courses</span></a></li>
                     <li><a href="admin_faculty.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-chalkboard-teacher w-6"></i><span>Faculty</span></a></li>
                     <li><a href="admin_gallery.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-images w-6"></i><span>Gallery</span></a></li>
                     <li><a href="admin_downloads.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-download w-6"></i><span>Downloads</span></a></li>
+                    
+                    <li class="pt-4 pb-2 px-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Network & Students</li>
                     <li><a href="admin_franchise.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-briefcase w-6"></i><span>Franchise</span></a></li>
                     <li><a href="admin_study_centers.html" class="sidebar-link flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-building w-6"></i><span>Study Centers</span></a></li>
-                    <li><a href="admin_student_zone.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors"><i class="fa fa-user-graduate w-6"></i><span>Student Zone</span></a></li>
+                    <li>
+                        <!-- Active Link -->
+                        <a href="admin_student_zone.html" class="sidebar-link active flex items-center px-4 py-3 rounded-md transition-colors">
+                            <i class="fa fa-user-graduate w-6"></i>
+                            <span>Student Zone</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -41,11 +62,21 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
-                <div class="flex items-center"><button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button><h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Student Results</h2></div>
+                <div class="flex items-center">
+                    <button class="text-gray-500 focus:outline-none md:hidden"><i class="fa fa-bars fa-lg"></i></button>
+                    <h2 class="text-xl font-semibold text-gray-800 ml-4">Manage Student Results</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="https://placehold.co/100x100/4F46E5/FFFFFF?text=A" alt="Admin" class="h-8 w-8 rounded-full bg-indigo-100">
+                        <span class="text-gray-700 font-medium text-sm" id="adminEmail">Checking...</span>
+                    </div>
+                </div>
             </header>
             
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 
+                <!-- Action Bar -->
                 <div class="flex justify-between items-center mb-6">
                     <div class="relative">
                         <input type="text" id="searchInput" placeholder="Search by Enrollment No..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-72">
@@ -56,6 +87,7 @@
                     </button>
                 </div>
 
+                <!-- Results Table -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table class="w-full text-left text-sm text-gray-600">
                         <thead class="bg-gray-50 text-gray-700 font-bold uppercase text-xs">
@@ -72,33 +104,60 @@
                         </tbody>
                     </table>
                 </div>
+
             </main>
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- ================= ADD RESULT MODAL ================= -->
     <div id="resultModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl mx-4 transform transition-all h-auto max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
             <div class="bg-indigo-600 px-6 py-4 rounded-t-xl flex justify-between items-center sticky top-0 z-10">
-                <h3 class="text-white font-bold text-lg">Add Student Result</h3>
+                <h3 class="text-white font-bold text-lg" id="modalTitle">Add Student Result</h3>
                 <button onclick="closeModal()" class="text-white hover:text-gray-200"><i class="fa fa-times"></i></button>
             </div>
             
+            <!-- Modal Body -->
             <form id="resultForm" class="p-6">
                 <h4 class="text-gray-800 font-bold mb-3 border-b pb-1">Student Details</h4>
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
-                    <input type="text" id="stuName" class="border p-2 rounded" placeholder="Student Name" required>
-                    <input type="text" id="stuFather" class="border p-2 rounded" placeholder="Father's Name" required>
-                    <input type="text" id="stuEnroll" class="border p-2 rounded" placeholder="Enrollment No (Unique)" required>
-                    <input type="date" id="stuDob" class="border p-2 rounded" required>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Student Name</label>
+                        <input type="text" id="stuName" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="Full Name" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Father's Name</label>
+                        <input type="text" id="stuFather" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="Father's Name" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Enrollment No.</label>
+                        <input type="text" id="stuEnroll" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="Ex: BESD/2025/..." required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Date of Birth</label>
+                        <input type="date" id="stuDob" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" required>
+                    </div>
                 </div>
 
                 <h4 class="text-gray-800 font-bold mb-3 border-b pb-1">Course Details</h4>
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
-                    <input type="text" id="stuCourse" class="border p-2 rounded" placeholder="Course Name (e.g. ADCA)" required>
-                    <input type="text" id="stuDuration" class="border p-2 rounded" placeholder="Duration (e.g. 12 Months)">
-                    <input type="text" id="stuCenterCode" class="border p-2 rounded" placeholder="Center Code">
-                    <input type="text" id="stuGrade" class="border p-2 rounded" placeholder="Final Grade (e.g. A+)">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Course Name</label>
+                        <input type="text" id="stuCourse" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="e.g. ADCA" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Duration</label>
+                        <input type="text" id="stuDuration" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="e.g. 12 Months">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Center Code</label>
+                        <input type="text" id="stuCenterCode" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="Ex: BESD-BR-001">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Final Grade</label>
+                        <input type="text" id="stuGrade" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none" placeholder="e.g. A+">
+                    </div>
                 </div>
 
                 <h4 class="text-gray-800 font-bold mb-3 border-b pb-1">Marks Entry</h4>
@@ -114,23 +173,32 @@
                             </tr>
                         </thead>
                         <tbody id="marksBody">
-                            <!-- Dynamic Rows -->
+                            <!-- Dynamic Rows will be added here -->
                         </tbody>
                     </table>
-                    <button type="button" onclick="addSubjectRow()" class="text-xs text-indigo-600 font-bold mt-1 hover:underline">+ Add Subject</button>
+                    <button type="button" onclick="addSubjectRow()" class="text-xs text-indigo-600 font-bold mt-1 hover:underline flex items-center">
+                        <i class="fa fa-plus-circle mr-1"></i> Add Subject Row
+                    </button>
                 </div>
                 
-                <div class="mt-6 flex justify-end space-x-3">
-                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-indigo-600 text-white rounded flex items-center"><span id="btnText">Publish Result</span><div id="btnLoader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div></button>
+                <div class="mt-6 flex justify-end space-x-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>
+                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md flex items-center justify-center">
+                        <span id="btnText">Publish Result</span>
+                        <div id="btnLoader" class="loader ease-linear rounded-full border-2 border-t-2 border-gray-200 h-5 w-5 ml-2 hidden"></div>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // --- YOUR CONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyDbhSCZ4tFkE-UWR1Sa1MboMMno98lSosQ",
             authDomain: "besd-foundtion.firebaseapp.com",
@@ -142,19 +210,31 @@
         };
 
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
         const colRef = collection(db, "student_results");
 
-        // --- ADD SUBJECT ROW ---
+        // --- AUTH CHECK ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('adminEmail').innerText = user.email;
+                loadResults();
+            } else {
+                alert("Security Alert: You are not logged in! Redirecting to login...");
+                window.location.href = "dashboard.html";
+            }
+        });
+
+        // --- DYNAMIC MARKS TABLE LOGIC ---
         window.addSubjectRow = () => {
             const tbody = document.getElementById('marksBody');
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td class="p-2 border"><input type="text" class="subject-name w-full outline-none" placeholder="Subject"></td>
-                <td class="p-2 border"><input type="number" class="subject-theory w-full outline-none" placeholder="0" oninput="calcTotal(this)"></td>
-                <td class="p-2 border"><input type="number" class="subject-prac w-full outline-none" placeholder="0" oninput="calcTotal(this)"></td>
+                <td class="p-2 border"><input type="text" class="subject-name w-full outline-none bg-transparent" placeholder="Subject Name"></td>
+                <td class="p-2 border"><input type="number" class="subject-theory w-full outline-none bg-transparent" placeholder="0" oninput="calcTotal(this)"></td>
+                <td class="p-2 border"><input type="number" class="subject-prac w-full outline-none bg-transparent" placeholder="0" oninput="calcTotal(this)"></td>
                 <td class="p-2 border bg-gray-50 subject-total font-bold text-center">0</td>
-                <td class="p-2 border text-center"><button type="button" class="text-red-500" onclick="this.closest('tr').remove()"><i class="fa fa-times"></i></button></td>
+                <td class="p-2 border text-center"><button type="button" class="text-red-500 hover:text-red-700" onclick="this.closest('tr').remove()"><i class="fa fa-times"></i></button></td>
             `;
             tbody.appendChild(row);
         };
@@ -169,36 +249,55 @@
         // --- LOAD DATA ---
         async function loadResults() {
             const tbody = document.getElementById('resultTableBody');
-            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Loading...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Loading results...</td></tr>';
+
             try {
                 const q = query(colRef, orderBy("timestamp", "desc"));
                 const snapshot = await getDocs(q);
-                tbody.innerHTML = "";
-                if(snapshot.empty) { tbody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500">No results found.</td></tr>'; return; }
                 
+                tbody.innerHTML = "";
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">No results published yet.</td></tr>';
+                    return;
+                }
+
                 snapshot.forEach(docSnap => {
                     const data = docSnap.data();
                     tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50 border-b">
+                        <tr class="hover:bg-gray-50 border-b border-gray-100">
                             <td class="px-6 py-4 font-mono font-bold text-indigo-600">${data.enrollment}</td>
-                            <td class="px-6 py-4">${data.name}</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">${data.name}</td>
                             <td class="px-6 py-4">${data.course}</td>
                             <td class="px-6 py-4">${data.dob}</td>
-                            <td class="px-6 py-4 text-right"><button class="text-red-600" onclick="deleteResult('${docSnap.id}')"><i class="fa fa-trash"></i></button></td>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <button class="delete-btn text-red-600 hover:text-red-900 bg-red-50 p-2 rounded-full" onclick="deleteResult('${docSnap.id}')" title="Delete"><i class="fa fa-trash"></i></button>
+                            </td>
                         </tr>
                     `;
                 });
-            } catch (e) { console.error(e); }
+
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-500">Error loading data.</td></tr>';
+            }
         }
 
         // --- SAVE DATA ---
         document.getElementById('resultForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('saveBtn');
-            const loader = document.getElementById('btnLoader');
-            btn.disabled = true; loader.classList.remove('hidden');
+            
+            if (!auth.currentUser) return alert("Permission Denied!");
 
-            // Collect Marks
+            const btn = document.getElementById('saveBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('btnLoader');
+            
+            btn.disabled = true;
+            btnText.innerText = "Publishing...";
+            loader.classList.remove('hidden');
+
+            // Collect Marks Data
             let marksData = [];
             let totalMarksObtained = 0;
             document.querySelectorAll('#marksBody tr').forEach(row => {
@@ -206,7 +305,8 @@
                 const th = Number(row.querySelector('.subject-theory').value) || 0;
                 const pr = Number(row.querySelector('.subject-prac').value) || 0;
                 const tot = th + pr;
-                if(sub) {
+                
+                if(sub.trim() !== "") {
                     marksData.push({ subject: sub, theory: th, practical: pr, total: tot });
                     totalMarksObtained += tot;
                 }
@@ -230,29 +330,57 @@
                 // Check duplicate enrollment
                 const q = query(colRef, where("enrollment", "==", data.enrollment));
                 const snap = await getDocs(q);
-                if(!snap.empty) { alert("Enrollment Number already exists!"); btn.disabled=false; loader.classList.add('hidden'); return; }
+                
+                if(!snap.empty) {
+                    alert("Error: Enrollment Number already exists!");
+                    btn.disabled = false;
+                    btnText.innerText = "Publish Result";
+                    loader.classList.add('hidden');
+                    return;
+                }
 
                 await addDoc(colRef, data);
-                alert("Result Published!");
-                closeModal(); loadResults();
-            } catch (e) { console.error(e); alert("Error saving result."); }
-            finally { btn.disabled = false; loader.classList.add('hidden'); }
+                alert("Result Published Successfully!");
+                closeModal();
+                loadResults();
+
+            } catch (e) {
+                console.error(e);
+                alert("Error saving result: " + e.message);
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = "Publish Result";
+                loader.classList.add('hidden');
+            }
         });
 
+        // --- DELETE DATA ---
         window.deleteResult = async (id) => {
-            if(confirm("Delete this result?")) { await deleteDoc(doc(db, "student_results", id)); loadResults(); }
+            if (!auth.currentUser) return alert("Permission Denied!");
+            
+            if(confirm("Are you sure you want to delete this result permanently?")) {
+                try {
+                    await deleteDoc(doc(db, "student_results", id));
+                    loadResults();
+                } catch(e) {
+                    alert("Error deleting: " + e.message);
+                }
+            }
         };
 
+        // --- MODAL HELPERS ---
         window.openModal = () => {
             document.getElementById('resultForm').reset();
             document.getElementById('marksBody').innerHTML = '';
-            addSubjectRow(); // Add 4 default rows
-            addSubjectRow(); addSubjectRow(); addSubjectRow();
+            // Add default 4 rows
+            addSubjectRow(); addSubjectRow(); addSubjectRow(); addSubjectRow();
             document.getElementById('resultModal').classList.remove('hidden');
         };
-        window.closeModal = () => document.getElementById('resultModal').classList.add('hidden');
 
-        loadResults();
+        window.closeModal = () => {
+            document.getElementById('resultModal').classList.add('hidden');
+        };
+
     </script>
 </body>
 </html>
